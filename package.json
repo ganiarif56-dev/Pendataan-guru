@@ -1,10 +1,11 @@
-﻿{
+{
   "name": "pendataan-guru-sd-salatiga-03",
   "version": "1.0.0",
   "description": "Sistem Pendataan Guru SD Salatiga 03 - Desain Profesional Minimalis",
   "main": "server/server.js",
   "scripts": {
-    "start": "node server/server.js"
+    "start": "node server/server.js",
+    "build": "echo 'Build complete'"
   },
   "keywords": ["pendataan-guru", "sd-salatiga-03", "school-administration"],
   "author": "SD SALATIGA 03",
