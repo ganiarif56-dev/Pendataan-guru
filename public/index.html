@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>SD SALATIGA 03 — Sistem Pendataan Guru & Profil Sekolah</title>
+  <meta name="description" content="Sistem Informasi dan Pendataan Guru Resmi SD Salatiga 03, Kota Salatiga, Jawa Tengah.">
+  <link rel="stylesheet" href="css/style.css?v=202610301840">
+  <link rel="icon" type="image/png" href="images/logo-sd03.png">
+  <!-- SheetJS Library for Excel (.xlsx) Export & Import -->
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+</head>
+<body>
+
+  <!-- Top Banner Notification -->
+  <div class="demo-badge-bar">
+    <span class="badge">Sistem Aktif</span>
+    <span>Sistem Informasi & Pendataan Tenaga Pendidik <b>SD SALATIGA 03</b> (NPSN: <span class="sync-school-npsn">20328453</span>)</span>
+  </div>
+
+  <!-- =====================================================================
+       1. WEBSITE PUBLIK (SD SALATIGA 03)
+       ===================================================================== -->
+  <div id="publicView">
+    <!-- Header Publik -->
+    <header class="pub-header">
+      <div class="container pub-nav-container">
+        <div class="pub-brand" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+          <div class="pub-brand-logo">
+            <img src="images/logo-sd03.png" alt="Logo SD Salatiga 03">
+          </div>
+          <div class="pub-brand-text">
+            <h1 class="sync-school-name">SD SALATIGA 03</h1>
+            <p>Beriman • Berkarakter • Berprestasi</p>
+          </div>
+        </div>
+
+        <nav>
+          <ul class="pub-pill-nav">
+            <li><a href="#beranda" class="active">Beranda</a></li>
+            <li><a href="#profil">Profil Sekolah</a></li>
+            <li><a href="javascript:void(0)" onclick="openPublicFormModal()" style="color:var(--primary); font-weight:700;">+ Isi Data Guru</a></li>
+            <li><a href="#direktori-guru">Data Guru</a></li>
+            <li><a href="#lokasi">Lokasi</a></li>
+            <li><a href="#kontak">Kontak</a></li>
+          </ul>
+        </nav>
+
+        <div class="pub-header-actions">
+          <button class="btn btn-primary btn-sm btn-shimmer" onclick="openPublicFormModal()">
+            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+            Isi Data Guru
+          </button>
+          <button class="btn btn-secondary btn-sm" onclick="openLoginModal()">
+            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
+            Masuk Admin
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="beranda">
+      <div class="container">
+        <div class="hero-main-card">
+          <!-- Background Media -->
+          <div class="hero-bg-media">
+            <img id="heroMainImg" src="images/gedung-sd03-utama.jpg" alt="Gedung Asli SD Salatiga 03" loading="eager">
+          </div>
+          <div class="hero-gradient-overlay"></div>
+
+          <!-- Hero Content -->
+          <div class="hero-content">
+            <div class="hero-title-badge">
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+              <span>Sistem Pendataan Guru Terpadu • TA 2026/2027</span>
+            </div>
+            <h2 class="hero-title sync-school-name">SD SALATIGA 03</h2>
+            <p class="hero-subtitle" id="heroDescriptionText">
+              Platform resmi administrasi, verifikasi, dan manajemen profil tenaga pendidik SD Salatiga 03 secara formal, akurat, dan transparan.
+            </p>
+
+            <div class="hero-badges-row">
+              <div class="hero-pill-badge">
+                <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span class="sync-school-address">Jl. Kalitaman No. 03, Salatiga, Jawa Tengah</span>
+              </div>
+              <div class="hero-pill-badge">
+                <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                <span>NPSN: <b class="sync-school-npsn">20328453</b></span>
+              </div>
+              <div class="hero-pill-badge">
+                <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <span>25 Guru & Tenaga Kependidikan</span>
+              </div>
+            </div>
+
+            <!-- CTA Actions (Tombol Berkilau Isi Data Guru) -->
+            <div class="hero-actions-row">
+              <button onclick="openPublicFormModal()" class="btn btn-primary btn-lg btn-shimmer">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                Isi Data Guru
+              </button>
+              <a href="#direktori-guru" class="btn btn-outline-white btn-lg">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                Lihat Data Guru
+              </a>
+            </div>
+          </div>
+
+          <!-- Hero Carousel Thumbnails -->
+          <div class="hero-carousel-bar">
+            <button class="hero-nav-arrow" onclick="prevHeroImage()" aria-label="Foto Sebelumnya">
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            </button>
+            <div class="hero-thumbnails-container" id="heroThumbsContainer">
+              <!-- Rendered via JS -->
+            </div>
+            <button class="hero-nav-arrow" onclick="nextHeroImage()" aria-label="Foto Selanjutnya">
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Public Content (2 Columns: Main Story + Right Side Widgets) -->
+    <div class="container">
+      <div class="pub-content-grid">
+        <!-- Left Side: Detail Profil & Data Guru Direktori -->
+        <main>
+          <!-- Profil Sekolah Section -->
+          <section class="pub-main-card" id="profil">
+            <div class="pub-section-header">
+              <div class="pub-section-title">
+                <svg width="22" height="22" fill="none" stroke="#2563EB" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                <h2>Profil Singkat SD Salatiga 03</h2>
+              </div>
+              <span class="badge badge-primary">Tahun Ajaran 2026/2027</span>
+            </div>
+
+            <div class="pub-profile-body">
+              <div class="pub-profile-text">
+                <p>
+                  <b>SD Salatiga 03</b> merupakan sekolah dasar negeri rujukan di Kota Salatiga yang berkomitmen menciptakan generasi cerdas, berkarakter profil pelajar Pancasila, dan mandiri melalui pembelajaran yang bermakna.
+                </p>
+                <p>
+                  Sistem pendataan ini dirancang khusus untuk memastikan administrasi kepegawaian, verifikasi SK, dan pembaruan berkas tenaga pendidik tercatat secara rapi, cepat, dan terpusat.
+                </p>
+
+                <div class="pub-profile-features">
+                  <div class="pub-feature-item">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span>Kurikulum Merdeka Mandiri Berbagi</span>
+                  </div>
+                  <div class="pub-feature-item">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span>Guru Bersertifikasi Pendidik</span>
+                  </div>
+                  <div class="pub-feature-item">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span>Layanan Inklusi & Shadow Teacher</span>
+                  </div>
+                  <div class="pub-feature-item">
+                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                    <span>Administrasi Berbasis Google Cloud</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="pub-profile-media">
+                <img src="images/siswa-berprestasi-sd03.jpg" alt="Siswa-Siswi Berprestasi SD Salatiga 03" loading="lazy">
+              </div>
+            </div>
+          </section>
+
+          <!-- Direktori Guru Publik -->
+          <section class="pub-main-card" id="direktori-guru">
+            <div class="pub-section-header">
+              <div class="pub-section-title">
+                <svg width="22" height="22" fill="none" stroke="#2563EB" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                <h2>Data Guru SD Salatiga 03</h2>
+              </div>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="badge badge-slate" id="pubTeacherCount">25 Guru</span>
+                <button class="btn btn-primary btn-sm btn-shimmer" onclick="openPublicFormModal()">+ Isi Data Guru</button>
+              </div>
+            </div>
+
+            <!-- Banner Keamanan & Privasi Data Guru -->
+            <div class="privacy-notice-banner">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <svg width="22" height="22" fill="none" stroke="#2563EB" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                <span><b>Perlindungan Keamanan Data:</b> Hanya nama guru yang ditampilkan terbuka. Rincian NIP, status kepegawaian, jabatan, dan golongan disamarkan (blur) untuk publik. Masuk sebagai Administrator untuk melihat seluruh data secara lengkap.</span>
+              </div>
+              <button class="btn btn-secondary btn-sm" onclick="openLoginModal()" style="background:#FFFFFF; font-weight:700;">Masuk Admin</button>
+            </div>
+
+            <!-- Toolbar Filter Direktori -->
+            <div style="display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap;">
+              <div class="filter-input-wrap" style="flex:1; min-width:200px;">
+                <input type="text" id="pubSearchInput" class="filter-search-input" placeholder="Cari nama guru, NIP, atau jabatan..." oninput="renderPublicTeacherTable()" style="width:100%;">
+              </div>
+              <select id="pubFilterStatus" class="filter-select" onchange="renderPublicTeacherTable()">
+                <option value="">Semua Status Kepegawaian</option>
+                <option value="PNS">PNS</option>
+                <option value="PPPK">PPPK</option>
+                <option value="PPPK Paruh Waktu">PPPK Paruh Waktu</option>
+                <option value="GTY">GTY / Honorer</option>
+              </select>
+            </div>
+
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th style="width:40px; text-align:center;">No</th>
+                    <th>Nama Lengkap Guru</th>
+                    <th>NIP / NUPTK <span style="font-size:10px;">🔒</span></th>
+                    <th>Status <span style="font-size:10px;">🔒</span></th>
+                    <th>Jabatan / Penugasan <span style="font-size:10px;">🔒</span></th>
+                    <th>Golongan <span style="font-size:10px;">🔒</span></th>
+                  </tr>
+                </thead>
+                <tbody id="pubTeacherTableBody">
+                  <!-- Rendered via JS -->
+                </tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- Lokasi Sekolah Section -->
+          <section class="pub-main-card" id="lokasi">
+            <div class="pub-section-header">
+              <div class="pub-section-title">
+                <svg width="22" height="22" fill="none" stroke="#2563EB" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <h2>Titik Lokasi SD Salatiga 03</h2>
+              </div>
+              <a href="https://www.google.com/maps/search/?api=1&query=SD+Negeri+Salatiga+03" target="_blank" class="btn btn-secondary btn-sm">Buka Google Maps</a>
+            </div>
+
+            <p class="sync-school-address" style="font-weight:600; color:var(--text-main); margin-bottom:14px;">
+              Jl. Kalitaman No. 03, Sidorejo, Kota Salatiga, Jawa Tengah 50711
+            </p>
+
+            <div style="border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-color); height:280px; box-shadow:var(--shadow-sm);">
+              <iframe 
+                src="https://maps.google.com/maps?q=SD+Negeri+Salatiga+03&t=&z=17&ie=UTF8&iwloc=&output=embed" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+          </section>
+        </main>
+
+        <!-- Right Side Widgets (Matching Referensi Gambar) -->
+        <aside class="pub-sidebar-widgets">
+          <!-- Widget 1: Logo dan Identitas Asli SD Salatiga 03 -->
+          <div class="widget-card">
+            <div class="widget-header">
+              <span>Logo & Identitas Resmi</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <div class="widget-identity-box">
+              <div class="widget-identity-logo">
+                <img src="images/logo-sd03.png" alt="Logo Resmi SD Salatiga 03">
+              </div>
+              <h3 class="widget-identity-title sync-school-name">SD SALATIGA 03</h3>
+              <p class="widget-identity-tagline">NPSN: <span class="sync-school-npsn">20328453</span></p>
+              <div style="margin-top:8px;">
+                <span class="badge badge-primary">Beriman • Berkarakter • Berprestasi</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Widget 2: Foto Sekolah Asli SD Salatiga 03 -->
+          <div class="widget-card">
+            <div class="widget-header">
+              <span>Foto Sekolah Asli</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+            </div>
+            <div class="widget-school-photo">
+              <img id="widgetMainPhoto" src="images/gedung-sd03-utama.jpg" alt="Gedung & Halaman SD Salatiga 03">
+            </div>
+            <div class="widget-photo-thumbs">
+              <img src="images/gedung-sd03-utama.jpg" alt="Gedung Utama" onclick="setHeroImage(0)" title="Gedung Utama">
+              <img src="images/siswa-berprestasi-sd03.jpg" alt="Siswa Berprestasi" onclick="setHeroImage(1)" title="Siswa Berprestasi">
+              <img src="images/piala-prestasi-sd03.jpg" alt="Koleksi Piala" onclick="setHeroImage(2)" title="Piala & Prestasi">
+              <img src="images/perpustakaan-sd03.jpg" alt="Perpustakaan" onclick="setHeroImage(3)" title="Perpustakaan">
+            </div>
+          </div>
+
+          <!-- Widget 3: Informasi Titik Lokasi Asli SD Salatiga 03 -->
+          <div class="widget-card">
+            <div class="widget-header">
+              <span>Titik Lokasi SD Salatiga 03</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
+            </div>
+            <div class="widget-map-preview" style="height:140px; padding:0; overflow:hidden; border-radius:var(--radius-md); border:1px solid var(--border-color); background:#F1F5F9;">
+              <iframe 
+                src="https://maps.google.com/maps?q=SD+Negeri+Salatiga+03&t=&z=16&ie=UTF8&iwloc=&output=embed" 
+                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
+            <div class="widget-location-address" style="margin-top:12px;">
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+              <span class="sync-school-address">Jl. Kalitaman No. 03, Sidorejo, Kota Salatiga, Jawa Tengah 50711</span>
+            </div>
+            <a href="https://www.google.com/maps/search/?api=1&query=SD+Negeri+Salatiga+03" target="_blank" class="btn btn-secondary btn-sm" style="width:100%;">
+              Lihat di Google Maps
+            </a>
+          </div>
+
+          <!-- Widget 4: Visi & Misi SD Salatiga 03 -->
+          <div class="widget-card">
+            <div class="widget-header">
+              <span>Visi & Misi Sekolah</span>
+              <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            </div>
+            <div class="widget-vm-item">
+              <div class="widget-vm-label">Visi Sekolah</div>
+              <p class="widget-vm-text">Terwujudnya peserta didik yang beriman, bertakwa, berkarakter profil pelajar Pancasila, cerdas, terampil, dan berwawasan lingkungan.</p>
+            </div>
+            <div class="widget-vm-item" style="margin-top:12px;">
+              <div class="widget-vm-label">Misi Utama</div>
+              <ol class="widget-vm-list">
+                <li>Melaksanakan pembelajaran aktif, inovatif, dan berpusat pada murid.</li>
+                <li>Membangun pembiasaan karakter berbudi pekerti luhur dan religius.</li>
+                <li>Mengembangkan potensi bakat akademik & non-akademik peserta didik.</li>
+              </ol>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- Public Footer -->
+    <footer class="pub-footer" id="kontak">
+      <div class="container">
+        <div class="pub-footer-grid">
+          <div class="pub-footer-brand">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+              <div class="pub-brand-logo" style="width:36px; height:36px;">
+                <img src="images/logo-sd03.png" alt="SD Salatiga 03">
+              </div>
+              <h3 class="sync-school-name">SD SALATIGA 03</h3>
+            </div>
+            <p>
+              Portal resmi profil sekolah dan sistem pendataan kepegawaian tenaga pendidik. Melayani dengan integritas dan profesionalitas.
+            </p>
+          </div>
+
+          <div class="pub-footer-col">
+            <h4>Navigasi</h4>
+            <ul class="pub-footer-links">
+              <li><a href="#beranda">Beranda</a></li>
+              <li><a href="#profil">Profil Sekolah</a></li>
+              <li><a href="javascript:void(0)" onclick="openPublicFormModal()">Formulir Isi Data Guru</a></li>
+              <li><a href="#direktori-guru">Data Guru Publik</a></li>
+              <li><a href="javascript:void(0)" onclick="openLoginModal()">Login Admin</a></li>
+            </ul>
+          </div>
+
+          <div class="pub-footer-col">
+            <h4>Kontak Resmi</h4>
+            <ul class="pub-footer-links">
+              <li class="sync-school-address">Jl. Kalitaman No. 03, Salatiga, Jawa Tengah</li>
+              <li>Telepon: (0298) 324-503</li>
+              <li>Email: sdnsalatiga03@gmail.com</li>
+              <li>NPSN: <span class="sync-school-npsn">20328453</span></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pub-footer-bottom">
+          <div>
+            <p>© 2026 <span class="sync-school-name">SD SALATIGA 03</span>. Seluruh Hak Cipta Dilindungi.</p>
+            <p style="margin-top:6px; font-size:12.5px; color:var(--text-body);">
+              Dikembangkan oleh: <b style="color:var(--primary); font-weight:700;">Ghani Arif Fadhillah</b>
+            </p>
+          </div>
+          <div style="text-align:right;">
+            <span class="badge badge-primary" style="font-size:12px; padding:4px 12px;">👨‍💻 Developer: Ghani Arif Fadhillah</span>
+            <p style="font-size:11px; color:var(--text-muted); margin-top:4px;">Sistem Informasi & Pendataan Guru Terpadu</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- =====================================================================
+       2. MODAL FORMULIR ISI DATA GURU (MANDIRI & EDIT ADMIN)
+       Menggunakan Kolom Resmi: Nama, NIP, Tempat/Tgl Lahir, Status, Jabatan, Perangkat, Penugasan, WA
+       ===================================================================== -->
+  <div class="modal-backdrop" id="publicFormModal">
+    <div class="modal-box" style="max-width:680px;">
+      <div class="modal-box-header" style="text-align:left; border-bottom:1px solid var(--border-color); padding:20px 24px;">
+        <button class="btn btn-icon close-btn" onclick="closePublicFormModal()" aria-label="Tutup">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div style="display:flex; align-items:center; gap:12px;">
+          <div class="pub-brand-logo" style="width:42px; height:42px;">
+            <img src="images/logo-sd03.png" alt="Logo">
+          </div>
+          <div>
+            <h2 id="publicFormModalTitle" style="font-size:17px; margin-bottom:2px;">Formulir Pendataan Guru — SD Salatiga 03</h2>
+            <p style="font-size:12px; color:var(--text-muted);">Isi formulir biodata resmi tenaga pendidik sesuai dokumen kepegawaian.</p>
+          </div>
+        </div>
+      </div>
+
+      <form id="formGuruMandiri" onsubmit="handleGuruFormSubmit(event)">
+        <div style="padding:24px; max-height:72vh; overflow-y:auto;">
+          
+          <!-- 1. Nama Lengkap & Gelar -->
+          <div class="form-group">
+            <label class="form-label">Nama Lengkap & Gelar *</label>
+            <div class="form-input-wrap">
+              <input type="text" id="fNama" placeholder="Contoh: Arini Nuja Wahyudi, S.Pd., M.Pd." required>
+            </div>
+          </div>
+
+          <!-- 2. NIP / NUPTK / NIK -->
+          <div class="form-group">
+            <label class="form-label">NIP / NUPTK / NIK</label>
+            <div class="form-input-wrap">
+              <input type="text" id="fNip" placeholder="18 digit NIP atau 16 digit NIK (Beri tanda - jika belum ada)">
+            </div>
+          </div>
+
+          <!-- 3. Tempat & Tanggal Lahir -->
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Tempat Lahir</label>
+              <div class="form-input-wrap">
+                <input type="text" id="fTempatLahir" placeholder="Kota / Kabupaten Kelahiran">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Tanggal Lahir</label>
+              <div class="form-input-wrap">
+                <input type="date" id="fTanggalLahir">
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Status Kepegawaian & Dropdown Lainnya -->
+          <div class="form-group">
+            <label class="form-label">Status Kepegawaian *</label>
+            <div class="form-input-wrap">
+              <select id="fStatus" required onchange="handleSelectOtherToggle(this, 'wrapStatusOther')">
+                <option value="">-- Pilih Status Kepegawaian --</option>
+                <option value="PNS">PNS (Pegawai Negeri Sipil)</option>
+                <option value="PPPK">PPPK (Pegawai Pemerintah dengan Perjanjian Kerja)</option>
+                <option value="PPPK Paruh Waktu">PPPK Paruh Waktu</option>
+                <option value="Honorer">Honorer</option>
+                <option value="GTY">GTY (Guru Tetap Yayasan)</option>
+                <option value="GTT">GTT (Guru Tidak Tetap)</option>
+                <option value="__other__">-- Lainnya (Ketik Pilihan Sendiri) --</option>
+              </select>
+            </div>
+            <!-- Custom status input -->
+            <div id="wrapStatusOther" style="display:none; margin-top:8px;">
+              <input type="text" id="fStatusOther" class="form-input-wrap" style="width:100%; padding:9px 12px; border:1px solid var(--border-color); border-radius:var(--radius-md);" placeholder="Ketik status kepegawaian Anda...">
+            </div>
+          </div>
+
+          <!-- 5. Jabatan / Penugasan & Dropdown Lainnya -->
+          <div class="form-group">
+            <label class="form-label">Jabatan / Penugasan Utama *</label>
+            <div class="form-input-wrap">
+              <select id="fJabatan" required onchange="handleSelectOtherToggle(this, 'wrapJabatanOther')">
+                <option value="">-- Pilih Jabatan / Penugasan --</option>
+                <option value="Kepala Sekolah">Kepala Sekolah</option>
+                <option value="Guru Kelas 1A dan Kokurikuler">Guru Kelas 1A dan Kokurikuler</option>
+                <option value="Guru Kelas 1B dan Kokurikuler">Guru Kelas 1B dan Kokurikuler</option>
+                <option value="Guru Kelas 2A, Guru Bahasa Inggris">Guru Kelas 2A, Guru Bahasa Inggris</option>
+                <option value="Guru Kelas 2B dan Kokurikuler">Guru Kelas 2B dan Kokurikuler</option>
+                <option value="Guru Kelas 3A, Guru Bahasa Inggris">Guru Kelas 3A, Guru Bahasa Inggris</option>
+                <option value="Guru Kelas 4A dan Kokurikuler">Guru Kelas 4A dan Kokurikuler</option>
+                <option value="Guru Kelas 4B dan Kokurikuler">Guru Kelas 4B dan Kokurikuler</option>
+                <option value="Guru Kelas 5A, KKA Kelas 6 dan Kokurikuler">Guru Kelas 5A, KKA Kelas 6</option>
+                <option value="Guru Kelas 5B dan Kokurikuler">Guru Kelas 5B dan Kokurikuler</option>
+                <option value="Guru Kelas 6A dan Kokurikuler">Guru Kelas 6A dan Kokurikuler</option>
+                <option value="Guru Kelas 6B dan Kokurikuler">Guru Kelas 6B dan Kokurikuler</option>
+                <option value="Guru PJOK Kelas 1-3 dan Kokurikuler">Guru PJOK Kelas 1-3</option>
+                <option value="Guru PJOK Kelas 4-6 dan Kokurikuler">Guru PJOK Kelas 4-6</option>
+                <option value="Guru PAIPB Kelas A dan Kokurikuler">Guru PAIPB</option>
+                <option value="Guru PAKPB dan Kokurikuler">Guru PAKPB</option>
+                <option value="Guru Seni Budaya Kelas 3-6">Guru Seni Budaya</option>
+                <option value="Guru Bahasa Jawa Kelas 2-6">Guru Bahasa Jawa</option>
+                <option value="Tenaga Kependidikan">Tenaga Kependidikan</option>
+                <option value="Shadow Teacher">Shadow Teacher</option>
+                <option value="__other__">-- Lainnya (Ketik Pilihan Sendiri) --</option>
+              </select>
+            </div>
+            <!-- Custom jabatan input -->
+            <div id="wrapJabatanOther" style="display:none; margin-top:8px;">
+              <input type="text" id="fJabatanOther" class="form-input-wrap" style="width:100%; padding:9px 12px; border:1px solid var(--border-color); border-radius:var(--radius-md);" placeholder="Ketik jabatan penugasan Anda...">
+            </div>
+          </div>
+
+          <!-- 6. Golongan / Perangkat & Penugasan Tambahan -->
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label class="form-label">Golongan / Perangkat</label>
+              <div class="form-input-wrap">
+                <input type="text" id="fPerangkat" placeholder="Contoh: III/a, III/d, IX, Paruh Waktu">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Penugasan Tambahan</label>
+              <div class="form-input-wrap">
+                <input type="text" id="fPenugasan" placeholder="Contoh: Pembina Pramuka, Pengelola BOS">
+              </div>
+            </div>
+          </div>
+
+          <!-- 7. Nomor WhatsApp / Kontak -->
+          <div class="form-group">
+            <label class="form-label">Nomor WhatsApp / HP Aktif</label>
+            <div class="form-input-wrap">
+              <input type="text" id="fWa" placeholder="Contoh: 0812-3456-7890">
+            </div>
+          </div>
+
+        </div>
+
+        <div style="padding:16px 24px; border-top:1px solid var(--border-color); display:flex; justify-content:flex-end; gap:10px; background:#F8FAFC;">
+          <button type="button" class="btn btn-secondary" onclick="closePublicFormModal()">Batal</button>
+          <button type="reset" class="btn btn-secondary">Reset</button>
+          <button type="submit" class="btn btn-primary">Simpan Data Guru</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       3. MODAL LOGIN ADMINISTRATOR
+       ===================================================================== -->
+  <div class="modal-backdrop" id="loginModal">
+    <div class="modal-box">
+      <div class="modal-box-header">
+        <button class="btn btn-icon close-btn" onclick="closeLoginModal()" aria-label="Tutup">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div class="pub-brand-logo" style="width:60px; height:60px; margin:0 auto 12px auto;">
+          <img src="images/logo-sd03.png" alt="Logo SD Salatiga 03">
+        </div>
+        <h2>Login Administrator</h2>
+        <p>Akses Dashboard Kelola Data Guru SD Salatiga 03</p>
+      </div>
+
+      <div class="login-form-body">
+        <div class="login-alert login-alert-error" id="loginAlert"></div>
+
+        <form id="adminLoginForm" onsubmit="handleAdminLogin(event)">
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <div class="form-input-wrap">
+              <input type="text" id="loginUsername" placeholder="Username..." value="admin" required autocomplete="username">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Kata Sandi</label>
+            <div class="form-input-wrap">
+              <input type="password" id="loginPassword" placeholder="Kata sandi..." value="admin" required autocomplete="current-password">
+              <button type="button" class="password-toggle-btn" onclick="togglePasswordVisibility()" aria-label="Lihat Kata Sandi">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" id="loginSubmitBtn" style="width:100%; margin-top:8px;">
+            Masuk ke Dashboard
+          </button>
+
+          <div class="login-demo-hint">
+            🔐 <b>Akses Administrator:</b> Username: <code>admin</code> • Password: <code>admin</code>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       4. DASHBOARD ADMINISTRATOR (PANEL KELOLA DATA GURU)
+       ===================================================================== -->
+  <div id="adminLayout">
+    <div class="admin-wrapper">
+      <!-- Dark Navy Sidebar -->
+      <aside class="admin-sidebar" id="adminSidebar">
+        <div class="admin-sidebar-header">
+          <div class="admin-sidebar-logo">
+            <img src="images/logo-sd03.png" alt="Logo SD Salatiga 03">
+          </div>
+          <div class="admin-sidebar-title">
+            <h2 class="sync-school-name">SD SALATIGA 03</h2>
+            <p>Admin Control Panel</p>
+          </div>
+        </div>
+
+        <ul class="admin-nav">
+          <li class="admin-nav-item active" data-tab="dashboard">
+            <a href="javascript:void(0)" onclick="switchAdminTab('dashboard')">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="admin-nav-item" data-tab="data-guru">
+            <a href="javascript:void(0)" onclick="switchAdminTab('data-guru')">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+              <span>Data Guru</span>
+            </a>
+          </li>
+          <li class="admin-nav-item" data-tab="hapus-semua">
+            <a href="javascript:void(0)" onclick="openDeleteAllConfirmModal()" style="color:#EF4444; background:rgba(239, 68, 68, 0.08); border-left:3px solid #EF4444; margin:4px 0;">
+              <svg width="18" height="18" fill="none" stroke="#EF4444" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+              <span style="font-weight:700; color:#EF4444;">Hapus Semua Data</span>
+            </a>
+          </li>
+          <li class="admin-nav-item" data-tab="profil-sekolah">
+            <a href="javascript:void(0)" onclick="switchAdminTab('profil-sekolah')">
+              <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+              <span>Profil Sekolah</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="admin-sidebar-footer">
+          <button class="btn-sidebar-back" onclick="showPublicView()">
+            <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+            <span>Kembali ke Website</span>
+          </button>
+        </div>
+      </aside>
+
+      <!-- Admin Main Area -->
+      <div class="admin-main">
+        <!-- Topbar -->
+        <header class="admin-topbar">
+          <div class="admin-search-wrap">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" placeholder="Pencarian guru, NIP, status, jabatan...">
+          </div>
+
+          <div class="admin-topbar-right">
+            <div class="admin-profile-pill">
+              <div class="pub-brand-logo" style="width:30px; height:30px;">
+                <img src="images/logo-sd03.png" alt="Admin">
+              </div>
+              <div class="admin-profile-meta">
+                <h4>Admin SD Salatiga 03</h4>
+                <p>Pengelola Kepegawaian</p>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- Body Container -->
+        <div class="admin-body">
+          
+          <!-- TAB 1: DASHBOARD -->
+          <div id="panel-dashboard">
+            <div class="welcome-banner">
+              <div class="welcome-text">
+                <h1>Selamat Datang di Panel SD Salatiga 03</h1>
+                <p>Ringkasan data kepegawaian tenaga pendidik <b class="sync-school-name">SD SALATIGA 03</b> aktual.</p>
+              </div>
+              <div class="date-pill">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span>T.A. 2026/2027</span>
+              </div>
+            </div>
+
+            <!-- 5 Stat Cards Status Kepegawaian Real -->
+            <div class="stat-cards-grid">
+              <div class="stat-metric-card">
+                <div class="stat-icon-wrap stat-icon-blue">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <div class="stat-meta">
+                  <div class="stat-val" id="statTotalGuru">25</div>
+                  <div class="stat-lbl">Total Guru & Tendik</div>
+                </div>
+              </div>
+
+              <div class="stat-metric-card">
+                <div class="stat-icon-wrap stat-icon-green">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div class="stat-meta">
+                  <div class="stat-val" id="statGuruPns">12</div>
+                  <div class="stat-lbl">Guru PNS</div>
+                </div>
+              </div>
+
+              <div class="stat-metric-card">
+                <div class="stat-icon-wrap stat-icon-purple">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div class="stat-meta">
+                  <div class="stat-val" id="statGuruPppk">9</div>
+                  <div class="stat-lbl">Guru PPPK</div>
+                </div>
+              </div>
+
+              <div class="stat-metric-card">
+                <div class="stat-icon-wrap stat-icon-orange">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <div class="stat-meta">
+                  <div class="stat-val" id="statGuruParuhWaktu">3</div>
+                  <div class="stat-lbl">PPPK Paruh Waktu</div>
+                </div>
+              </div>
+
+              <div class="stat-metric-card">
+                <div class="stat-icon-wrap stat-icon-pink">
+                  <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                </div>
+                <div class="stat-meta">
+                  <div class="stat-val" id="statGuruLainnya">1</div>
+                  <div class="stat-lbl">GTY / Honorer</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Google Spreadsheet Integration & Export Card -->
+            <div class="spreadsheet-banner-card" style="background: linear-gradient(135deg, #0B1B3D 0%, #173878 100%); color: #FFF; border-radius: var(--radius-lg); padding: 22px 24px; margin-bottom: 24px; box-shadow: var(--shadow-md); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+              <div style="max-width: 620px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                  <span style="background: rgba(255,255,255,0.15); color: #FFF; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.5px;">
+                    Integrasi Cloud Resmi
+                  </span>
+                  <span id="dashSyncStatusBadge" style="background: #10B981; color: #FFF; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 999px;">
+                    ● Google Spreadsheet Terhubung Otomatis
+                  </span>
+                </div>
+                <h2 style="font-family: var(--font-heading); font-size: 19px; font-weight: 800; margin: 0 0 6px 0; color: #FFF;">
+                  Sinkronisasi Database & Integrasi Google Spreadsheet
+                </h2>
+                <p style="font-size: 13px; color: rgba(255,255,255,0.85); margin: 0; line-height: 1.5;">
+                  Setiap pengisian form data guru di website otomatis masuk secara real-time ke Google Spreadsheet resmi SD Salatiga 03. Admin dapat mengecek langsung melalui link Spreadsheet atau Apps Script di bawah.
+                </p>
+                <div style="display: flex; gap: 16px; margin-top: 10px; font-size: 12px; color: rgba(255,255,255,0.75); flex-wrap: wrap;">
+                  <span>Target: <b>Sheet "Data Guru"</b></span>
+                  <span>ID: <code style="background: rgba(0,0,0,0.25); color: #93C5FD; padding: 2px 6px; border-radius: 4px;">1ta97_la7fFTWaZW...</code></span>
+                  <span id="dashSyncTimeSpan">Status: <b>Otomatis Real-Time</b></span>
+                </div>
+              </div>
+
+              <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center;">
+                <a href="https://docs.google.com/spreadsheets/d/1ta97_la7fFTWaZW54qu3GzA0QM0WlyWjcsm4fI6Jz8E/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background: #10B981; border-color: #059669; font-weight: 700; text-decoration: none;" title="Buka Google Spreadsheet Online SD Salatiga 03">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                  Buka Google Spreadsheet
+                </a>
+                <a href="https://script.google.com/macros/s/AKfycbwadRyR_Sq6laDy0-M-sokyMeXW26X5rvvGexAPDRPSiI6RFO2O9KKThmEYbfjwLShv/exec" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="background: rgba(255,255,255,0.12); color: #FFF; border-color: rgba(255,255,255,0.25); text-decoration: none;" title="Buka Endpoint Google Apps Script">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                  Apps Script
+                </a>
+                <button onclick="exportToExcel()" class="btn btn-secondary" style="background: rgba(255,255,255,0.12); color: #FFF; border-color: rgba(255,255,255,0.25);" title="Unduh data dalam format Excel Spreadsheet (.xlsx)">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                  Unduh Excel (.xlsx)
+                </button>
+                <button onclick="exportToCSV()" class="btn btn-secondary" style="background: rgba(255,255,255,0.12); color: #FFF; border-color: rgba(255,255,255,0.25);" title="Unduh data dalam format CSV">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                  Unduh CSV
+                </button>
+              </div>
+            </div>
+
+            <!-- Analytics Grid -->
+            <div class="analytics-grid">
+              <!-- Bar Chart -->
+              <div class="analytics-card">
+                <div class="analytics-card-header">
+                  <h3>Distribusi Guru per Kategori Jabatan</h3>
+                  <span class="badge badge-slate">SD Salatiga 03</span>
+                </div>
+                <div class="bar-chart-container" id="barChartContainer">
+                  <!-- Rendered via JS -->
+                </div>
+              </div>
+
+              <!-- Guru Terbaru -->
+              <div class="analytics-card">
+                <div class="analytics-card-header">
+                  <h3>Guru & Tendik Terbaru</h3>
+                  <button class="btn btn-secondary btn-sm" onclick="switchAdminTab('data-guru')">Lihat Semua</button>
+                </div>
+                <div class="recent-list" id="recentTeachersList">
+                  <!-- Rendered via JS -->
+                </div>
+              </div>
+
+              <!-- Donut Chart -->
+              <div class="analytics-card">
+                <div class="analytics-card-header">
+                  <h3>Komposisi Status Kepegawaian</h3>
+                  <span class="badge badge-primary">Proporsi</span>
+                </div>
+                <div class="donut-chart-wrap">
+                  <div class="donut-svg-box">
+                    <svg viewBox="0 0 140 140" id="donutSvg">
+                      <!-- Rendered via JS -->
+                    </svg>
+                    <div class="donut-center-text">
+                      <h4 id="donutCenterTotal">25</h4>
+                      <p>Total</p>
+                    </div>
+                  </div>
+                  <div class="donut-legend" id="donutLegend">
+                    <!-- Rendered via JS -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 2: DATA GURU -->
+          <div id="panel-data-guru" style="display:none;">
+            <div class="admin-card">
+              <div class="table-toolbar">
+                <div class="toolbar-title">
+                  <h2>Data Guru SD Salatiga 03</h2>
+                  <p>Daftar seluruh tenaga pendidik, SK, NIP, dan golongan kepegawaian resmi.</p>
+                </div>
+
+                <div class="toolbar-actions">
+                  <div class="filter-input-wrap">
+                    <input type="text" id="teacherSearchInput" class="filter-search-input" placeholder="Cari nama, NIP, atau jabatan..." oninput="renderAdminTable()">
+                  </div>
+
+                  <select id="filterStatusSelect" class="filter-select" onchange="renderAdminTable()">
+                    <option value="">Semua Status Kepegawaian</option>
+                    <option value="PNS">PNS</option>
+                    <option value="PPPK">PPPK</option>
+                    <option value="PPPK Paruh Waktu">PPPK Paruh Waktu</option>
+                    <option value="GTY">GTY / Honorer</option>
+                  </select>
+
+                  <button class="btn btn-secondary btn-sm" onclick="exportToExcel()" title="Unduh Spreadsheet Excel (.xlsx)">
+                    <svg width="15" height="15" fill="none" stroke="#10B981" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    Unduh Excel (.xlsx)
+                  </button>
+
+                  <button class="btn btn-secondary btn-sm" onclick="exportToCSV()" title="Unduh Berkas CSV (.csv)">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                    Unduh CSV
+                  </button>
+
+                  <a href="https://docs.google.com/spreadsheets/d/1ta97_la7fFTWaZW54qu3GzA0QM0WlyWjcsm4fI6Jz8E/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-outline-primary btn-sm" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;" title="Buka Google Spreadsheet Online SD Salatiga 03">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                    Buka Google Spreadsheet
+                  </a>
+
+                  <button class="btn btn-primary" onclick="openPublicFormModal()">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                    Tambah Guru
+                  </button>
+
+                  <button class="btn btn-danger btn-sm" onclick="openDeleteAllConfirmModal()" title="Hapus seluruh data guru dan kosongkan Google Spreadsheet">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                    Hapus Semua Data
+                  </button>
+                </div>
+              </div>
+
+              <div class="table-responsive">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th style="width:45px;">No</th>
+                      <th>Nama Lengkap & Kelahiran</th>
+                      <th>NIP / NUPTK / NIK</th>
+                      <th>Status Kepegawaian</th>
+                      <th>Jabatan / Penugasan</th>
+                      <th>Golongan</th>
+                      <th>Penugasan Tambahan</th>
+                      <th style="width:110px;">Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="teacherTableBody">
+                    <!-- Rendered via JS -->
+                  </tbody>
+                </table>
+
+                <div class="empty-table-state" id="tableEmptyState" style="display:none;">
+                  <div class="empty-state-icon">
+                    <svg width="28" height="28" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+                  </div>
+                  <h3>Tidak ada data guru</h3>
+                  <p>Tidak ditemukan data guru yang sesuai dengan pencarian.</p>
+                </div>
+              </div>
+
+              <!-- Danger Action Card Hapus Semua Data -->
+              <div style="margin-top:24px; padding:18px 22px; background:#FEF2F2; border:1px solid #FEE2E2; border-radius:var(--radius-md); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;">
+                <div>
+                  <h4 style="font-size:14px; font-weight:800; color:#991B1B; margin:0 0 4px 0;">Zona Bahaya: Hapus Semua Data</h4>
+                  <p style="font-size:12px; color:#B91C1C; margin:0;">Menghapus seluruh data guru dari database dan mengosongkan Google Spreadsheet secara permanen.</p>
+                </div>
+                <button class="btn btn-danger" onclick="openDeleteAllConfirmModal()" style="font-weight:700;">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  Hapus Semua Data
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB 3: PROFIL SEKOLAH (PENGATURAN) -->
+          <div id="panel-profil-sekolah" style="display:none;">
+            <div class="settings-grid">
+              <div class="admin-card" style="padding:24px;">
+                <h2 style="font-family:var(--font-heading); font-size:17px; font-weight:800; margin-bottom:6px;">Pengaturan Identitas SD Salatiga 03</h2>
+                <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:20px;">Ubah data dan kontak sekolah yang tampil pada portal publik.</p>
+
+                <form id="settingsSchoolForm" onsubmit="handleSaveSettings(event)">
+                  <div class="form-group">
+                    <label class="form-label">Nama Sekolah Resmi</label>
+                    <div class="form-input-wrap">
+                      <input type="text" id="setSchoolName" value="SD SALATIGA 03" required>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Slogan / Visi Singkat</label>
+                    <div class="form-input-wrap">
+                      <input type="text" id="setSchoolTagline" value="Beriman • Berkarakter • Berprestasi">
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Deskripsi Utama Portal (Hero)</label>
+                    <div class="form-input-wrap">
+                      <textarea id="setSchoolDesc" rows="3"></textarea>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label">Alamat Lengkap Sekolah</label>
+                    <div class="form-input-wrap">
+                      <input type="text" id="setSchoolAddress">
+                    </div>
+                  </div>
+
+                  <div class="form-grid-2">
+                    <div class="form-group">
+                      <label class="form-label">Email Sekolah</label>
+                      <div class="form-input-wrap">
+                        <input type="email" id="setSchoolEmail">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Nomor Telepon</label>
+                      <div class="form-input-wrap">
+                        <input type="text" id="setSchoolPhone">
+                      </div>
+                    </div>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary" style="margin-top:10px;">
+                    Simpan Perubahan
+                  </button>
+                </form>
+              </div>
+
+              <div class="preview-card-box">
+                <h3 style="font-family:var(--font-heading); font-size:14px; font-weight:700; margin-bottom:12px; color:var(--text-muted); text-transform:uppercase;">
+                  Identitas Terdaftar
+                </h3>
+                <div style="background:var(--bg-subtle); border-radius:var(--radius-md); padding:16px; border:1px solid var(--border-color); text-align:center;">
+                  <div class="pub-brand-logo" style="width:64px; height:64px; margin:0 auto 12px auto;">
+                    <img src="images/logo-sd03.png" alt="SD Salatiga 03">
+                  </div>
+                  <h4 style="font-size:15px; font-weight:800; color:var(--text-main);">SD SALATIGA 03</h4>
+                  <p style="font-size:12px; color:var(--text-muted);">NPSN: 20328453 • Kota Salatiga</p>
+                  <p style="font-size:12px; color:var(--text-body); margin-top:10px;">
+                    Jl. Kalitaman No. 03, Sidorejo, Kota Salatiga, Jawa Tengah 50711
+                  </p>
+                </div>
+
+                <!-- Integrasi Google Spreadsheet di Pengaturan -->
+                <div style="background:var(--bg-subtle); border-radius:var(--radius-md); padding:16px; border:1px solid var(--border-color); margin-top:16px;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+                    <h4 style="font-size:13px; font-weight:700; margin:0; color:var(--text-main);">📊 Integrasi Google Spreadsheet & Apps Script</h4>
+                    <span class="badge badge-active" id="settingsSyncBadge" style="font-size:10px; background:#10B981; color:#FFF;">🟢 Terhubung Otomatis</span>
+                  </div>
+                  <p style="font-size:11.5px; color:var(--text-muted); margin-bottom:12px; line-height:1.5;">
+                    Data guru tersinkronisasi secara otomatis dan langsung ke Google Spreadsheet resmi SD Salatiga 03 melalui Apps Script backend. Tidak memerlukan sinkronisasi manual.
+                  </p>
+
+                  <div style="background:rgba(37,99,235,0.06); border-radius:var(--radius-sm); padding:10px 12px; margin-bottom:12px; font-size:11.5px; border:1px solid rgba(37,99,235,0.15);">
+                    <div style="margin-bottom:4px;"><b>Spreadsheet ID:</b> <code style="font-size:11px; color:#1D4ED8;">1ta97_la7fFTWaZW54qu3GzA0QM0WlyWjcsm4fI6Jz8E</code></div>
+                    <div style="margin-bottom:4px;"><b>Sheet Target:</b> <code>Data Guru</code></div>
+                    <div><b>Status:</b> <span style="color:#059669; font-weight:700;">● Real-Time Cloud Auto-Sync</span></div>
+                  </div>
+
+                  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <a href="https://docs.google.com/spreadsheets/d/1ta97_la7fFTWaZW54qu3GzA0QM0WlyWjcsm4fI6Jz8E/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="font-size:11.5px; padding:6px 12px; text-decoration:none; background:#10B981; border-color:#059669;">
+                      <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                      Buka Google Spreadsheet
+                    </a>
+                    <a href="https://script.google.com/macros/s/AKfycbwadRyR_Sq6laDy0-M-sokyMeXW26X5rvvGexAPDRPSiI6RFO2O9KKThmEYbfjwLShv/exec" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm" style="font-size:11.5px; padding:6px 12px; text-decoration:none;">
+                      <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                      Buka Apps Script
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Admin -->
+        <footer style="padding:16px 24px; text-align:center; font-size:12px; color:var(--text-muted); border-top:1px solid var(--border-color); margin-top:30px;">
+          <span>© 2026 SD SALATIGA 03 • Sistem Informasi & Pendataan Guru</span> •
+          <span>Dikembangkan oleh: <b style="color:var(--primary); font-weight:700;">Ghani Arif Fadhillah</b></span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       5. MODAL DETAIL GURU (ADMIN)
+       ===================================================================== -->
+  <div class="modal-backdrop" id="detailGuruModal">
+    <div class="detail-modal-box">
+      <div class="detail-banner">
+        <div class="detail-teacher-profile">
+          <div class="pub-brand-logo" style="width:64px; height:64px; font-size:24px; font-weight:800; color:#2563EB;">
+            <img src="images/logo-sd03.png" alt="Logo">
+          </div>
+          <div class="detail-profile-meta">
+            <h2 id="detailTeacherNama">-</h2>
+            <p id="detailTeacherJabatan">-</p>
+            <span class="badge badge-active" id="detailTeacherStatus">-</span>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-secondary btn-sm" id="detailEditBtn">Edit Data</button>
+          <button class="btn btn-icon close-btn" onclick="closeDetailModal()" aria-label="Tutup" style="color:#FFF;">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="detail-content-body">
+        <div>
+          <table class="detail-info-table">
+            <tr>
+              <td class="label-col">NIP / NUPTK / NIK</td>
+              <td class="val-col"><code id="detailNip">-</code></td>
+            </tr>
+            <tr>
+              <td class="label-col">Tempat, Tgl Lahir</td>
+              <td class="val-col" id="detailTtl">-</td>
+            </tr>
+            <tr>
+              <td class="label-col">Status Kepegawaian</td>
+              <td class="val-col" id="detailKepegawaian">-</td>
+            </tr>
+            <tr>
+              <td class="label-col">Golongan / Perangkat</td>
+              <td class="val-col" id="detailPerangkat">-</td>
+            </tr>
+            <tr>
+              <td class="label-col">Penugasan Tambahan</td>
+              <td class="val-col" id="detailPenugasan">-</td>
+            </tr>
+            <tr>
+              <td class="label-col">Nomor WhatsApp / HP</td>
+              <td class="val-col" id="detailWa">-</td>
+            </tr>
+          </table>
+        </div>
+
+        <div>
+          <div class="quote-highlight-box">
+            <h4 style="font-size:12px; font-weight:700; color:var(--primary); text-transform:uppercase; margin-bottom:6px;">Instansi Resmi</h4>
+            <p><b>SD SALATIGA 03</b> — Pemerintah Kota Salatiga, Dinas Pendidikan.</p>
+          </div>
+          <div style="background:var(--bg-subtle); border-radius:var(--radius-md); padding:16px; border:1px solid var(--border-color);">
+            <h4 style="font-size:13px; font-weight:700; margin-bottom:6px;">Status Verifikasi</h4>
+            <p style="font-size:12px; color:var(--text-muted);">Data terdaftar dan terverifikasi di database lokal SD Salatiga 03.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       6. MODAL PERINGATAN HAPUS SEMUA DATA GURU (BAHAYA)
+       ===================================================================== -->
+  <div class="modal-backdrop" id="deleteAllConfirmModal">
+    <div class="modal-box" style="max-width: 520px; border-top: 5px solid #DC2626;">
+      <div class="modal-header" style="background:#FEF2F2; border-bottom:1px solid #FEE2E2;">
+        <div class="modal-title-wrap">
+          <div style="width:40px; height:40px; border-radius:50%; background:#FEE2E2; display:flex; align-items:center; justify-content:center; color:#DC2626; font-size:20px;">
+            ⚠️
+          </div>
+          <div>
+            <h3 style="font-size:16px; font-weight:800; color:#991B1B; margin:0;">PERINGATAN: Hapus Semua Data Guru</h3>
+            <p style="font-size:12px; color:#B91C1C; margin:0;">Tindakan Permanen & Mengosongkan Spreadsheet</p>
+          </div>
+        </div>
+        <button class="btn btn-icon close-btn" onclick="closeDeleteAllConfirmModal()" aria-label="Tutup">
+          <svg width="20" height="20" fill="none" stroke="#991B1B" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <div class="modal-body" style="padding: 22px;">
+        <div style="background:#FFF5F5; border:1px solid #FED7D7; border-radius:var(--radius-md); padding:14px; margin-bottom:18px;">
+          <h4 style="font-size:13.5px; font-weight:800; color:#C53030; margin:0 0 6px 0;">Perhatian: Anda akan menghapus <span id="deleteAllCountDisplay">25</span> data guru!</h4>
+          <ul style="font-size:12px; color:#742A2A; margin:0 0 0 16px; padding:0; line-height:1.6;">
+            <li>Seluruh data guru akan dihapus permanen dari sistem database SD Salatiga 03.</li>
+            <li><b>Google Spreadsheet resmi (Sheet "Data Guru") juga akan otomatis dikosongkan.</b></li>
+            <li>Tindakan ini tidak dapat dibatalkan secara otomatis setelah dieksekusi.</li>
+          </ul>
+        </div>
+
+        <p style="font-size:12.5px; color:var(--text-main); margin-bottom:10px;">
+          Untuk melanjutkan, silakan ketik kata konfirmasi <b style="color:#DC2626; background:#FEE2E2; padding:2px 8px; border-radius:4px; letter-spacing:1px;">HAPUS SEMUA</b> di bawah ini:
+        </p>
+
+        <div class="form-input-wrap" style="margin-bottom:18px;">
+          <input type="text" id="confirmDeleteAllInput" placeholder="Ketik HAPUS SEMUA" style="font-size:14px; font-weight:700; text-align:center; border:2px solid #F87171; text-transform:uppercase; padding:10px;" oninput="validateDeleteAllInput()">
+        </div>
+
+        <div style="display:flex; justify-content:flex-end; gap:10px;">
+          <button type="button" class="btn btn-secondary" onclick="closeDeleteAllConfirmModal()">Batal</button>
+          <button type="button" class="btn btn-danger" id="executeDeleteAllBtn" disabled onclick="executeDeleteAllTeachers()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            Ya, Hapus Semua & Kosongkan Spreadsheet
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js?v=202610301840"></script>
+</body>
+</html>

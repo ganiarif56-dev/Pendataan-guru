@@ -1,0 +1,266 @@
+[
+  {
+    "id": "AUDIT-921500",
+    "timestamp": "2026-10-30T11:15:21.500Z",
+    "user": "admin",
+    "action": "Sinkronisasi Spreadsheet",
+    "detail": "Sinkronisasi 22 guru ke Google Sheets",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-917972",
+    "timestamp": "2026-10-30T11:15:17.972Z",
+    "user": "admin",
+    "action": "Hapus Guru",
+    "detail": "Menghapus data guru: ghani",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-917967",
+    "timestamp": "2026-10-30T11:15:17.967Z",
+    "user": "admin",
+    "action": "Sinkronisasi Spreadsheet",
+    "detail": "Sinkronisasi 23 guru ke Google Sheets",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-913720",
+    "timestamp": "2026-10-30T11:15:13.720Z",
+    "user": "admin",
+    "action": "Hapus Guru",
+    "detail": "Menghapus data guru: gita",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-908496",
+    "timestamp": "2026-10-30T11:15:08.496Z",
+    "user": "admin",
+    "action": "Sinkronisasi Spreadsheet",
+    "detail": "Sinkronisasi 24 guru ke Google Sheets",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-904354",
+    "timestamp": "2026-10-30T11:15:04.354Z",
+    "user": "admin",
+    "action": "Hapus Guru",
+    "detail": "Menghapus data guru: rian",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-899301",
+    "timestamp": "2026-10-30T11:14:59.301Z",
+    "user": "admin",
+    "action": "Sinkronisasi Spreadsheet",
+    "detail": "Sinkronisasi 25 guru ke Google Sheets",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-894443",
+    "timestamp": "2026-10-30T11:14:54.443Z",
+    "user": "admin",
+    "action": "Hapus Guru",
+    "detail": "Menghapus data guru: anuuuu",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-682698",
+    "timestamp": "2026-10-30T11:11:22.698Z",
+    "user": "admin",
+    "action": "Ekspor CSV",
+    "detail": "Mengunduh berkas CSV (26 guru)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-676988",
+    "timestamp": "2026-10-30T11:11:16.988Z",
+    "user": "admin",
+    "action": "Login Admin",
+    "detail": "Berhasil login ke Dashboard Admin",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-314483",
+    "timestamp": "2026-10-29T16:11:54.483Z",
+    "user": "admin",
+    "action": "Hapus Guru",
+    "detail": "Menghapus data guru: Budi Santoso, S.Pd",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-310949",
+    "timestamp": "2026-10-29T16:11:50.949Z",
+    "user": "admin",
+    "action": "Tambah Guru",
+    "detail": "Menambah data guru: Budi Santoso, S.Pd",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-303334",
+    "timestamp": "2026-10-29T16:11:43.334Z",
+    "user": "admin",
+    "action": "Sinkronisasi Spreadsheet",
+    "detail": "Sinkronisasi 26 guru ke Google Sheets",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-586164",
+    "timestamp": "2026-10-29T15:59:46.164Z",
+    "user": "admin",
+    "action": "Sinkronisasi Spreadsheet",
+    "detail": "Sinkronisasi 26 guru ke Google Sheets",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-247044",
+    "timestamp": "2026-10-29T15:54:07.044Z",
+    "user": "admin",
+    "action": "Sinkronisasi Spreadsheet",
+    "detail": "Sinkronisasi lokal 26 guru (URL Apps Script belum diatur)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-244664",
+    "timestamp": "2026-10-29T15:54:04.664Z",
+    "user": "admin",
+    "action": "Tambah Guru",
+    "detail": "Menambah data guru: anuuuu",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-848194",
+    "timestamp": "2026-10-29T15:30:48.194Z",
+    "user": "admin",
+    "action": "Sinkronisasi Spreadsheet",
+    "detail": "Sinkronisasi lokal 25 guru (URL Apps Script belum diatur)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-808322",
+    "timestamp": "2026-10-29T15:30:08.322Z",
+    "user": "admin",
+    "action": "Sinkronisasi Spreadsheet",
+    "detail": "Sinkronisasi lokal 25 guru (URL Apps Script belum diatur)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-058079",
+    "timestamp": "2026-10-29T15:17:38.079Z",
+    "user": "admin",
+    "action": "Hapus Semua Guru",
+    "detail": "Menghapus seluruh master data (25 guru) dan mengosongkan spreadsheet",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-585035",
+    "timestamp": "2026-10-29T15:09:45.035Z",
+    "user": "admin",
+    "action": "Sinkronisasi Spreadsheet",
+    "detail": "Sinkronisasi lokal 25 guru (URL Apps Script belum diatur)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-927227",
+    "timestamp": "2026-10-29T14:58:47.227Z",
+    "user": "admin",
+    "action": "Sinkronisasi Spreadsheet",
+    "detail": "Sinkronisasi lokal 25 guru (URL Apps Script belum diatur)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-922918",
+    "timestamp": "2026-10-29T14:58:42.918Z",
+    "user": "admin",
+    "action": "Ekspor CSV",
+    "detail": "Mengunduh berkas CSV (25 guru)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-707073",
+    "timestamp": "2026-10-14T06:51:47.073Z",
+    "user": "admin",
+    "action": "Manajemen Kolom",
+    "detail": "Memperbarui skema kolom (8 kolom)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-484441",
+    "timestamp": "2026-10-14T06:48:04.441Z",
+    "user": "admin",
+    "action": "Manajemen Kolom",
+    "detail": "Memperbarui skema kolom (9 kolom)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-464310",
+    "timestamp": "2026-10-14T06:47:44.310Z",
+    "user": "admin",
+    "action": "Manajemen Kolom",
+    "detail": "Memperbarui skema kolom (9 kolom)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-685792",
+    "timestamp": "2026-10-14T05:11:25.792Z",
+    "user": "admin",
+    "action": "Manajemen Kolom",
+    "detail": "Memperbarui skema kolom (8 kolom)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-663332",
+    "timestamp": "2026-10-14T05:11:03.332Z",
+    "user": "admin",
+    "action": "Manajemen Kolom",
+    "detail": "Memperbarui skema kolom (8 kolom)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-004280",
+    "timestamp": "2026-10-14T01:56:44.281Z",
+    "user": "admin",
+    "action": "Manajemen Kolom",
+    "detail": "Memperbarui skema kolom (7 kolom)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-472452",
+    "timestamp": "2026-10-13T11:54:32.452Z",
+    "user": "admin",
+    "action": "Manajemen Kolom",
+    "detail": "Memperbarui skema kolom (7 kolom)",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-538319",
+    "timestamp": "2026-10-13T11:38:58.319Z",
+    "user": "admin",
+    "action": "Hapus Guru",
+    "detail": "Menghapus data guru: Budi Raharja, M.Pd.",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-538279",
+    "timestamp": "2026-10-13T11:38:58.279Z",
+    "user": "admin",
+    "action": "Tambah Guru",
+    "detail": "Menambah data guru: Budi Raharja, M.Pd.",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-438738",
+    "timestamp": "2026-10-13T11:37:18.738Z",
+    "user": "admin",
+    "action": "Login Admin",
+    "detail": "Berhasil login ke Dashboard Admin",
+    "status": "Sukses"
+  },
+  {
+    "id": "AUDIT-729763",
+    "timestamp": "2026-10-13T11:25:29.763Z",
+    "user": "admin",
+    "action": "Login Admin",
+    "detail": "Berhasil login ke Dashboard Admin",
+    "status": "Sukses"
+  }
+]

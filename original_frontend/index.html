@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GuruData — Administrasi Data Guru</title>
+<style>
+:root{
+  --primary:#2563eb; --primary-dark:#1d4ed8; --bg:#f5f7fb; --card:#fff;
+  --text:#172033; --muted:#6b7280; --line:#e5e7eb; --success:#16a34a;
+  --warning:#d97706; --danger:#dc2626; --sidebar:#102a43;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:var(--bg);color:var(--text)}
+button,input,select{font:inherit}.app{min-height:100vh;display:flex}
+.sidebar{width:250px;background:var(--sidebar);color:#fff;padding:22px 16px;position:fixed;inset:0 auto 0 0;z-index:10}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px;padding:8px 10px 28px}
+.brand-icon{width:38px;height:38px;border-radius:12px;background:#3b82f6;display:grid;place-items:center}
+.nav{display:grid;gap:7px}.nav button{border:0;background:transparent;color:#d9e5f1;text-align:left;padding:12px 14px;border-radius:10px;cursor:pointer}
+.nav button:hover,.nav button.active{background:#1e4264;color:#fff}.nav small{display:block;color:#9fb3c8;padding:18px 12px 7px;text-transform:uppercase;font-size:10px;letter-spacing:.12em}
+.main{margin-left:250px;width:calc(100% - 250px);padding:28px 32px}
+.topbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}.title h1{margin:0;font-size:26px}.title p{margin:5px 0 0;color:var(--muted)}
+.user{display:flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--line);padding:8px 12px;border-radius:12px}
+.avatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#dbeafe;color:#1d4ed8;font-weight:700}
+.page{display:none}.page.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 4px 14px rgba(15,23,42,.04)}
+.stat-label{color:var(--muted);font-size:13px}.stat{font-size:29px;font-weight:800;margin-top:8px}.stat-note{font-size:12px;color:var(--success);margin-top:5px}
+.panel{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 14px rgba(15,23,42,.04)}
+.panel-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:12px}.panel-head h2{font-size:17px;margin:0}.toolbar{display:flex;gap:9px;flex-wrap:wrap}
+input,select{border:1px solid #d6dbe3;border-radius:9px;padding:9px 11px;background:#fff;outline:none}input:focus,select:focus{border-color:#60a5fa;box-shadow:0 0 0 3px #dbeafe}
+.btn{border:0;border-radius:9px;padding:9px 13px;cursor:pointer;font-weight:650}.btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-dark)}.btn-light{background:#f3f4f6;color:#374151}.btn-danger{background:#fee2e2;color:#b91c1c}
+.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;min-width:850px}th,td{text-align:left;padding:13px 16px;border-bottom:1px solid var(--line);font-size:13px}th{background:#f8fafc;color:#475569;font-weight:700}tr:hover td{background:#fafcff}
+.badge{display:inline-flex;padding:4px 9px;border-radius:999px;font-size:11px;font-weight:700}.badge-active{background:#dcfce7;color:#15803d}.badge-contract{background:#fef3c7;color:#a16207}
+.empty{text-align:center;padding:42px;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;padding:20px}.field label{display:block;font-size:13px;font-weight:700;margin-bottom:7px}.field input,.field select{width:100%}.full{grid-column:1/-1}.form-actions{padding:0 20px 20px;display:flex;justify-content:flex-end;gap:10px}
+.hero{background:linear-gradient(135deg,#eff6ff,#fff);border:1px solid #dbeafe;border-radius:18px;padding:24px;margin-bottom:20px}.hero h2{margin:0 0 7px;font-size:22px}.hero p{margin:0;color:#64748b;max-width:700px}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.info h3{margin:0 0 7px;font-size:14px}.info p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
+.toast{position:fixed;right:22px;bottom:22px;background:#111827;color:#fff;padding:12px 15px;border-radius:10px;display:none;z-index:99}
+@media(max-width:900px){.sidebar{width:210px}.main{margin-left:210px;width:calc(100% - 210px);padding:20px}.cards{grid-template-columns:repeat(2,1fr)}.info-grid{grid-template-columns:1fr}}
+@media(max-width:650px){.sidebar{position:static;width:100%;min-height:auto}.app{display:block}.main{margin:0;width:100%}.cards{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.topbar{align-items:flex-start;gap:12px;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="brand-icon">G</div> GuruData</div>
+  <nav class="nav">
+    <small>Menu</small>
+    <button class="active" data-page="dashboard">▦ &nbsp; Dashboard</button>
+    <button data-page="data">▤ &nbsp; Data Guru</button>
+    <button data-page="form">＋ &nbsp; Isi Data Saya</button>
+    <small>Akun</small>
+    <button data-page="help">? &nbsp; Panduan</button>
+  </nav>
+</aside>
+
+<main class="main">
+  <div class="topbar">
+    <div class="title"><h1 id="pageTitle">Dashboard</h1><p>Administrasi data guru sekolah</p></div>
+    <div class="user"><div class="avatar">A</div><div><b>Admin</b><div style="font-size:11px;color:#6b7280">Administrator</div></div></div>
+  </div>
+
+  <section id="dashboard" class="page active">
+    <div class="hero">
+      <h2>Selamat datang di GuruData 👋</h2>
+      <p>Kelola data guru dengan sederhana. Guru dapat mengisi datanya sendiri melalui formulir, sementara admin dapat melihat dan mengelola data yang masuk.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><div class="stat-label">Total Guru</div><div class="stat" id="statTotal">0</div><div class="stat-note">Data tersimpan</div></div>
+      <div class="card"><div class="stat-label">Data Lengkap</div><div class="stat" id="statComplete">0</div><div class="stat-note">Siap diverifikasi</div></div>
+      <div class="card"><div class="stat-label">Belum Lengkap</div><div class="stat" id="statIncomplete">0</div><div class="stat-note" style="color:var(--warning)">Perlu dilengkapi</div></div>
+      <div class="card"><div class="stat-label">Status Aktif</div><div class="stat" id="statActive">0</div><div class="stat-note">Guru aktif</div></div>
+    </div>
+    <div class="panel">
+      <div class="panel-head"><h2>Data Guru Terbaru</h2><button class="btn btn-light" onclick="showPage('data')">Lihat semua</button></div>
+      <div class="table-wrap"><table><thead><tr><th>Nama</th><th>NIP</th><th>Jabatan</th><th>Status</th><th>Kelas / Mapel</th></tr></thead><tbody id="recentBody"></tbody></table></div>
+    </div>
+  </section>
+
+  <section id="data" class="page">
+    <div class="panel">
+      <div class="panel-head">
+        <h2>Data Guru</h2>
+        <div class="toolbar"><input id="search" placeholder="Cari nama/NIP..." oninput="renderTable()"><button class="btn btn-primary" onclick="showPage('form')">＋ Tambah Data</button></div>
+      </div>
+      <div class="table-wrap"><table><thead><tr><th>No.</th><th>Nama</th><th>NIP</th><th>Tempat</th><th>Tanggal</th><th>Status</th><th>Jabatan</th><th>Perangkat</th><th>Kelas / Mapel</th><th>Aksi</th></tr></thead><tbody id="dataBody"></tbody></table></div>
+    </div>
+  </section>
+
+  <section id="form" class="page">
+    <div class="panel">
+      <div class="panel-head"><h2>Formulir Data Guru</h2><span style="font-size:12px;color:#6b7280">Isi sesuai dokumen resmi</span></div>
+      <form id="guruForm">
+        <div class="form-grid">
+          <div class="field"><label>Nama lengkap *</label><input name="nama" required placeholder="Nama lengkap dan gelar"></div>
+          <div class="field"><label>NIP</label><input name="nip" placeholder="NIP / NIK"></div>
+          <div class="field"><label>Tempat lahir</label><input name="tempat" placeholder="Kota/Kabupaten"></div>
+          <div class="field"><label>Tanggal lahir</label><input name="tanggal" type="date"></div>
+          <div class="field"><label>Status *</label><select name="status" required><option value="">Pilih status</option><option>PNS</option><option>PPPK</option><option>Honorer</option><option>GTY</option><option>GTT</option><option>Lainnya</option></select></div>
+          <div class="field"><label>Jabatan *</label><input name="jabatan" required placeholder="Contoh: Guru Kelas"></div>
+          <div class="field"><label>Perangkat</label><input name="perangkat" placeholder="Contoh: Kurikulum / Kesiswaan"></div>
+          <div class="field"><label>Kelas / Mapel *</label><input name="kelas" required placeholder="Contoh: Kelas 5 / IPAS"></div>
+        </div>
+        <div class="form-actions"><button type="button" class="btn btn-light" onclick="showPage('dashboard')">Batal</button><button class="btn btn-primary">Simpan Data</button></div>
+      </form>
+    </div>
+  </section>
+
+  <section id="help" class="page">
+    <div class="hero"><h2>Panduan Penggunaan</h2><p>Versi awal frontend ini dibuat sederhana agar guru dapat langsung memahami alurnya.</p></div>
+    <div class="info-grid">
+      <div class="card info"><h3>👩‍🏫 Untuk Guru</h3><p>Buka link → pilih <b>Isi Data Saya</b> → isi data → simpan. Pada tahap backend, data akan otomatis dikirim ke Google Spreadsheet.</p></div>
+      <div class="card info"><h3>🧑‍💼 Untuk Admin</h3><p>Admin dapat melihat data, mencari guru, memeriksa kelengkapan, dan nantinya melakukan verifikasi.</p></div>
+      <div class="card info"><h3>☁️ Penyimpanan</h3><p>Frontend ini belum terhubung ke Google Spreadsheet. Integrasi akan dibuat pada tahap backend menggunakan Google Apps Script/API.</p></div>
+    </div>
+  </section>
+</main>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const KEY='gurudata_demo';
+let data=JSON.parse(localStorage.getItem(KEY)||'[]');
+
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===id));
+  const titles={dashboard:'Dashboard',data:'Data Guru',form:'Isi Data Saya',help:'Panduan'};
+  document.getElementById('pageTitle').textContent=titles[id]||'GuruData';
+  if(id==='dashboard') renderDashboard();
+  if(id==='data') renderTable();
+}
+document.querySelectorAll('.nav button').forEach(b=>b.addEventListener('click',()=>showPage(b.dataset.page)));
+
+function complete(x){return x.nama&&x.status&&x.jabatan&&x.kelas}
+function renderDashboard(){
+  document.getElementById('statTotal').textContent=data.length;
+  document.getElementById('statComplete').textContent=data.filter(complete).length;
+  document.getElementById('statIncomplete').textContent=data.filter(x=>!complete(x)).length;
+  document.getElementById('statActive').textContent=data.filter(x=>x.status==='PNS'||x.status==='PPPK').length;
+  const rows=data.slice(-5).reverse();
+  document.getElementById('recentBody').innerHTML=rows.length?rows.map(x=>`<tr><td>${esc(x.nama)}</td><td>${esc(x.nip||'-')}</td><td>${esc(x.jabatan||'-')}</td><td>${badge(x.status)}</td><td>${esc(x.kelas||'-')}</td></tr>`).join(''):`<tr><td colspan="5" class="empty">Belum ada data. Silakan isi formulir.</td></tr>`;
+}
+function badge(s){return `<span class="badge ${s==='PNS'||s==='PPPK'?'badge-active':'badge-contract'}">${esc(s||'Belum diisi')}</span>`}
+function renderTable(){
+  const q=(document.getElementById('search')?.value||'').toLowerCase();
+  const rows=data.filter(x=>[x.nama,x.nip,x.jabatan,x.kelas].join(' ').toLowerCase().includes(q));
+  document.getElementById('dataBody').innerHTML=rows.length?rows.map((x,i)=>`<tr>
+    <td>${i+1}</td><td><b>${esc(x.nama)}</b></td><td>${esc(x.nip||'-')}</td><td>${esc(x.tempat||'-')}</td><td>${esc(x.tanggal||'-')}</td><td>${badge(x.status)}</td><td>${esc(x.jabatan||'-')}</td><td>${esc(x.perangkat||'-')}</td><td>${esc(x.kelas||'-')}</td>
+    <td><button class="btn btn-danger" onclick="removeData('${x.id}')">Hapus</button></td></tr>`).join(''):`<tr><td colspan="10" class="empty">Data guru belum tersedia.</td></tr>`;
+}
+document.getElementById('guruForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=new FormData(e.target), x=Object.fromEntries(f.entries());
+  x.id=Date.now().toString(); data.push(x); localStorage.setItem(KEY,JSON.stringify(data));
+  e.target.reset(); toast('Data tersimpan di demo frontend.'); showPage('dashboard');
+});
+function removeData(id){if(confirm('Hapus data ini?')){data=data.filter(x=>x.id!==id);localStorage.setItem(KEY,JSON.stringify(data));renderTable();renderDashboard();toast('Data dihapus.');}}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.style.display='block';setTimeout(()=>t.style.display='none',2200)}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+renderDashboard();
+</script>
+</body>
+</html>

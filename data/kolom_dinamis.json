@@ -1,0 +1,95 @@
+[
+  {
+    "id": "nama",
+    "label": "Nama Lengkap & Gelar",
+    "type": "text",
+    "required": true,
+    "isDefault": true,
+    "placeholder": "Contoh: Arini Nuja Wahyudi, S.Pd., M.Pd."
+  },
+  {
+    "id": "nip",
+    "label": "NIP / NUPTK / NIK",
+    "type": "text",
+    "required": false,
+    "isDefault": true,
+    "placeholder": "18 digit NIP atau 16 digit NIK"
+  },
+  {
+    "id": "tempat_lahir",
+    "label": "Tempat Lahir",
+    "type": "text",
+    "required": false,
+    "isDefault": true,
+    "placeholder": "Kota / Kabupaten kelahiran"
+  },
+  {
+    "id": "tanggal_lahir",
+    "label": "Tanggal Lahir",
+    "type": "date",
+    "required": false,
+    "isDefault": true,
+    "placeholder": "YYYY-MM-DD"
+  },
+  {
+    "id": "status",
+    "label": "Status Kepegawaian",
+    "type": "select",
+    "required": true,
+    "isDefault": true,
+    "options": [
+      "PNS",
+      "PPPK",
+      "PPPK Paruh Waktu",
+      "Honorer",
+      "GTY",
+      "GTT"
+    ],
+    "hasOther": true
+  },
+  {
+    "id": "jabatan",
+    "label": "Jabatan / Penugasan",
+    "type": "select",
+    "required": true,
+    "isDefault": true,
+    "options": [
+      "Kepala Sekolah",
+      "Guru Kelas 1A dan Kokurikuler",
+      "Guru Kelas 1B dan Kokurikuler",
+      "Guru Kelas 2A, Guru Bahasa Inggris",
+      "Guru Kelas 2B dan Kokurikuler",
+      "Guru Kelas 3A, Guru Bahasa Inggris",
+      "Guru Kelas 4A dan Kokurikuler",
+      "Guru Kelas 4B dan Kokurikuler",
+      "Guru Kelas 5A, KKA Kelas 6",
+      "Guru Kelas 5B dan Kokurikuler",
+      "Guru Kelas 6A dan Kokurikuler",
+      "Guru Kelas 6B dan Kokurikuler",
+      "Guru PJOK Kelas 1-3",
+      "Guru PJOK Kelas 4-6",
+      "Guru PAIPB",
+      "Guru PAKPB",
+      "Guru Seni Budaya",
+      "Guru Bahasa Jawa",
+      "Tenaga Kependidikan",
+      "Shadow Teacher"
+    ],
+    "hasOther": true
+  },
+  {
+    "id": "perangkat",
+    "label": "Golongan / Perangkat",
+    "type": "text",
+    "required": false,
+    "isDefault": true,
+    "placeholder": "Ketik perangkat/golongan (contoh: III/a, III/d, IX, Paruh Waktu)"
+  },
+  {
+    "id": "penugasan",
+    "label": "penugasan",
+    "type": "text",
+    "required": true,
+    "isDefault": false
+  }
+]
