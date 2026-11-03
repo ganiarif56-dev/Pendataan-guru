@@ -667,11 +667,34 @@ function showPublicView() {
   document.getElementById('adminLayout').style.display = 'none';
   document.getElementById('publicView').style.display = 'block';
   appState.activeView = 'public';
+  toggleAdminSidebar(false);
+  togglePublicMobileMenu(false);
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function togglePublicMobileMenu(forceState) {
+  const drawer = document.getElementById('pubMobileDrawer');
+  const backdrop = document.getElementById('pubMobileBackdrop');
+  if (!drawer) return;
+  const isOpen = (typeof forceState === 'boolean') ? forceState : !drawer.classList.contains('active');
+  drawer.classList.toggle('active', isOpen);
+  if (backdrop) backdrop.classList.toggle('active', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+function toggleAdminSidebar(forceState) {
+  const sidebar = document.getElementById('adminSidebar');
+  const backdrop = document.getElementById('adminSidebarBackdrop');
+  if (!sidebar) return;
+  const isOpen = (typeof forceState === 'boolean') ? forceState : !sidebar.classList.contains('mobile-open');
+  sidebar.classList.toggle('mobile-open', isOpen);
+  if (backdrop) backdrop.classList.toggle('active', isOpen);
+  document.body.style.overflow = (isOpen && window.innerWidth <= 992) ? 'hidden' : '';
 }
 
 function switchAdminTab(tabName) {
   appState.adminTab = tabName;
+  toggleAdminSidebar(false);
 
   document.querySelectorAll('.admin-nav-item').forEach(item => {
     item.classList.toggle('active', item.dataset.tab === tabName);
@@ -1125,3 +1148,22 @@ function escapeHtml(str) {
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 }
+
+// Global responsive & accessibility keyboard listener
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    togglePublicMobileMenu(false);
+    toggleAdminSidebar(false);
+    closePublicFormModal();
+    closeLoginModal();
+    closeDetailModal();
+    closeDeleteAllConfirmModal();
+  }
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 992) {
+    togglePublicMobileMenu(false);
+    toggleAdminSidebar(false);
+  }
+});

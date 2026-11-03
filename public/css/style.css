@@ -2244,53 +2244,568 @@ img {
 }
 
 /* ==========================================================================
-   RESPONSIVENESS (MOBILE & TABLET)
+   MODERN RESPONSIVE SYSTEM (ALL DEVICES: DESKTOP, LAPTOP, TABLET, MOBILE)
    ========================================================================== */
-@media (max-width: 1024px) {
+
+/* 1. Mobile Menu Buttons & Drawers */
+.pub-mobile-toggle-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  color: var(--text-main);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pub-mobile-toggle-btn:hover,
+.pub-mobile-toggle-btn:focus-visible {
+  background: #FFFFFF;
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.pub-mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: -320px;
+  width: min(320px, 86dvw);
+  height: 100dvh;
+  background: #FFFFFF;
+  z-index: 1100;
+  box-shadow: -4px 0 24px rgba(15, 23, 42, 0.18);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.pub-mobile-drawer.active {
+  right: 0;
+}
+
+.pub-mobile-drawer-header {
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.pub-mobile-nav-links {
+  list-style: none;
+  padding: 12px 14px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pub-mobile-nav-links li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-body);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+.pub-mobile-nav-links li a:hover,
+.pub-mobile-nav-links li a:active {
+  background: var(--bg-subtle);
+  color: var(--primary);
+}
+
+.pub-mobile-drawer-actions {
+  padding: 16px 20px 24px 20px;
+  margin-top: auto;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pub-mobile-drawer-actions .btn-block {
+  width: 100%;
+  justify-content: center;
+  padding: 12px;
+}
+
+.pub-mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(4px);
+  z-index: 1090;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.pub-mobile-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* 2. Admin Sidebar Mobile Toggle & Backdrop */
+.admin-sidebar-toggle-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  color: var(--text-main);
+  flex-shrink: 0;
+}
+
+.admin-sidebar-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(3px);
+  z-index: 990;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.admin-sidebar-backdrop.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   BREAKPOINTS: DESKTOP & LARGE LAPTOPS (<= 1200px)
+   ========================================================================== */
+@media (max-width: 1200px) {
   .stat-cards-grid {
     grid-template-columns: repeat(3, 1fr);
   }
-  .analytics-grid {
-    grid-template-columns: 1fr;
-  }
   .pub-content-grid {
-    grid-template-columns: 1fr;
-  }
-  .settings-grid {
-    grid-template-columns: 1fr;
+    gap: 20px;
   }
 }
 
-@media (max-width: 768px) {
-  .pub-pill-nav {
-    display: none;
-  }
-  .hero-content {
-    padding: 32px 24px 20px 24px;
-  }
-  .hero-title {
-    font-size: 28px;
-  }
-  .stat-cards-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .pub-profile-body {
+/* ==========================================================================
+   BREAKPOINTS: TABLET LANDSCAPE & SMALL LAPTOPS (<= 992px)
+   ========================================================================== */
+@media (max-width: 992px) {
+  /* Layout Collapsing */
+  .pub-content-grid {
     grid-template-columns: 1fr;
   }
-  .detail-content-body {
+
+  .analytics-grid {
     grid-template-columns: 1fr;
   }
+
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Admin Sidebar transforms into Mobile Drawer */
   .admin-sidebar {
     position: fixed;
-    left: -250px;
     top: 0;
     bottom: 0;
-    z-index: 999;
+    left: -270px;
+    width: 260px;
+    height: 100dvh;
+    z-index: 1000;
+    box-shadow: 6px 0 24px rgba(0, 0, 0, 0.25);
+    transition: left 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
+
   .admin-sidebar.mobile-open {
     left: 0;
   }
-  .form-grid-2 {
-    grid-template-columns: 1fr;
+
+  .admin-sidebar-toggle-btn {
+    display: inline-flex;
+  }
+
+  .admin-topbar {
+    padding: 10px 18px;
+    gap: 12px;
+  }
+
+  .admin-topbar-right .admin-profile-meta p {
+    display: none;
+  }
+
+  .stat-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .spreadsheet-banner-card {
+    flex-direction: column;
+    align-items: flex-start !important;
+  }
+
+  .spreadsheet-banner-card > div:last-child {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
   }
 }
+
+/* ==========================================================================
+   BREAKPOINTS: TABLET PORTRAIT & MOBILE (<= 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* Public Header */
+  .pub-pill-nav {
+    display: none;
+  }
+
+  .pub-mobile-toggle-btn {
+    display: inline-flex;
+  }
+
+  .pub-header {
+    padding: 10px 0;
+  }
+
+  .pub-nav-container {
+    padding: 0 16px;
+  }
+
+  .pub-brand-text h1 {
+    font-size: 16px;
+  }
+
+  .pub-brand-text p {
+    font-size: 10px;
+  }
+
+  .pub-header-actions {
+    gap: 8px;
+  }
+
+  /* Hero Card Adaptations */
+  .hero-section {
+    padding: 14px 0 24px 0;
+  }
+
+  .hero-main-card {
+    min-height: auto;
+    border-radius: var(--radius-lg);
+  }
+
+  .hero-content {
+    padding: clamp(24px, 5vw, 36px) clamp(18px, 4vw, 24px) 18px clamp(18px, 4vw, 24px);
+    max-width: 100%;
+  }
+
+  .hero-title {
+    font-size: clamp(24px, 6vw, 32px);
+    margin-bottom: 10px;
+  }
+
+  .hero-subtitle {
+    font-size: 13.5px;
+    margin-bottom: 18px;
+  }
+
+  .hero-badges-row {
+    margin-bottom: 20px;
+    gap: 8px;
+  }
+
+  .hero-pill-badge {
+    font-size: 11.5px;
+    padding: 4px 10px;
+  }
+
+  /* Hero Carousel Bar on Mobile */
+  .hero-carousel-bar {
+    padding: 12px 18px 18px 18px;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .hero-thumbnails-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    max-width: 100%;
+    padding: 4px 8px;
+  }
+
+  .hero-thumbnails-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero-thumb {
+    width: 54px;
+    height: 38px;
+    flex-shrink: 0;
+  }
+
+  /* Public Main Card */
+  .pub-main-card {
+    padding: clamp(16px, 4vw, 24px);
+    border-radius: var(--radius-md);
+    margin-bottom: 18px;
+  }
+
+  .pub-profile-body {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .pub-profile-features {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .pub-profile-media img {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+
+  /* Responsive Sticky Table (Pinned Name on Horizontal Swipe) */
+  .table-responsive {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 10px 12px;
+    font-size: 12.5px;
+  }
+
+  /* Sticky 2nd Column (Nama Guru) */
+  .data-table th:nth-child(2),
+  .data-table td:nth-child(2) {
+    position: sticky;
+    inset-inline-start: 0;
+    z-index: 5;
+    background: #FFFFFF;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .data-table th:nth-child(2) {
+    z-index: 6;
+    background: #F8FAFC;
+  }
+
+  /* Toolbars */
+  .table-toolbar {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .toolbar-actions {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter-input-wrap,
+  .filter-search-input,
+  .filter-select {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Forms & Modals */
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .modal-backdrop {
+    padding: 10px;
+  }
+
+  .modal-box {
+    max-height: 92dvh;
+    border-radius: var(--radius-lg);
+  }
+
+  .modal-box-header {
+    padding: 16px 18px;
+  }
+
+  /* Detail Guru Modal */
+  .detail-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 18px;
+    gap: 12px;
+  }
+
+  .detail-content-body {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  /* Footer */
+  .pub-footer {
+    padding: 36px 0 20px 0;
+  }
+
+  .pub-footer-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    text-align: center;
+  }
+
+  .pub-footer-brand {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .pub-footer-brand-logo {
+    margin: 0 auto;
+  }
+
+  .pub-footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 14px;
+    align-items: center;
+  }
+
+  .pub-footer-bottom > div:last-child {
+    text-align: center !important;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINTS: SMALL MOBILE (<= 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  /* Top Banner Notification */
+  .demo-badge-bar {
+    padding: 5px 10px;
+    font-size: 11px;
+    flex-wrap: wrap;
+    line-height: 1.4;
+  }
+
+  .demo-badge-bar span.badge {
+    font-size: 10px;
+    padding: 1px 6px;
+  }
+
+  /* Brand Logo & Header Actions */
+  .pub-brand-logo {
+    width: 32px;
+    height: 32px;
+  }
+
+  .btn-text-desktop {
+    display: none;
+  }
+
+  .pub-header-actions .btn-sm {
+    padding: 8px 10px;
+  }
+
+  /* Hero Section */
+  .hero-actions-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .hero-actions-row .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* Admin Topbar */
+  .admin-topbar {
+    padding: 8px 12px;
+  }
+
+  .admin-search-wrap input {
+    font-size: 12px;
+    padding: 6px 10px 6px 30px;
+  }
+
+  .admin-profile-meta h4 {
+    font-size: 12px;
+  }
+
+  /* Stat Cards */
+  .stat-cards-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .stat-metric-card {
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .stat-icon-wrap {
+    width: 36px;
+    height: 36px;
+  }
+
+  .stat-icon-wrap svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .stat-val {
+    font-size: 20px;
+  }
+
+  .stat-lbl {
+    font-size: 10.5px;
+  }
+
+  /* Buttons in Toolbar */
+  .toolbar-actions .btn,
+  .toolbar-actions a.btn {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  /* Touch Targets Accessibility (minimum 44px) */
+  button,
+  .btn,
+  input,
+  select,
+  .hero-nav-arrow {
+    min-height: 42px;
+  }
+}
+
+/* ==========================================================================
+   BREAKPOINTS: EXTRA COMPACT SCREENS (<= 360px)
+   ========================================================================== */
+@media (max-width: 360px) {
+  .stat-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .pub-brand-text p {
+    display: none;
+  }
+}
+
