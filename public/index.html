@@ -240,6 +240,26 @@
               <button class="btn btn-secondary btn-sm" onclick="openLoginModal()" style="background:#FFFFFF; font-weight:700;">Masuk Admin</button>
             </div>
 
+            <!-- Card Grafik Distribusi Kategori Jabatan (Interaktif Publik & Admin) -->
+            <div class="analytics-card pub-chart-card" style="margin-bottom: 20px; border: 1px solid var(--border-color); background: #FFFFFF; border-radius: var(--radius-lg); padding: 18px 20px; box-shadow: var(--shadow-sm);">
+              <div class="analytics-card-header" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:8px; margin-bottom:12px;">
+                <div>
+                  <h3 style="font-size:15px; font-weight:700; color:var(--text-main); margin:0;">Distribusi Guru per Kategori Jabatan</h3>
+                  <p style="font-size:12px; color:var(--text-muted); margin:3px 0 0 0;">💡 Klik salah satu grafik batang di bawah untuk melihat rincian guru dalam kategori tersebut</p>
+                </div>
+                <span class="badge badge-primary">SD Salatiga 03</span>
+              </div>
+              <div class="bar-chart-container" id="pubBarChartContainer">
+                <!-- Rendered via JS -->
+              </div>
+            </div>
+
+            <!-- Active category filter badge (if filtered via chart) -->
+            <div id="pubCategoryFilterBadge" style="display:none; align-items:center; gap:8px; margin-bottom:14px; background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 14px; border-radius:var(--radius-pill); width:fit-content; font-size:13px; color:#1E40AF;">
+              <span>Filter Kategori: <b id="pubCategoryFilterText">-</b></span>
+              <button type="button" onclick="clearPublicCategoryFilter()" style="background:none; border:none; cursor:pointer; font-weight:700; color:#1E40AF; padding:0 4px;" title="Hapus filter">✕ Hapus Filter</button>
+            </div>
+
             <!-- Toolbar Filter Direktori -->
             <div style="display:flex; gap:12px; margin-bottom:18px; flex-wrap:wrap;">
               <div class="filter-input-wrap" style="flex:1; min-width:200px;">
@@ -828,8 +848,11 @@
             <div class="analytics-grid">
               <!-- Bar Chart -->
               <div class="analytics-card">
-                <div class="analytics-card-header">
-                  <h3>Distribusi Guru per Kategori Jabatan</h3>
+                <div class="analytics-card-header" style="display:flex; justify-content:space-between; align-items:center;">
+                  <div>
+                    <h3>Distribusi Guru per Kategori Jabatan</h3>
+                    <p style="font-size:11.5px; color:var(--text-muted); margin:2px 0 0 0;">💡 Klik grafik batang untuk melihat data rincian guru</p>
+                  </div>
                   <span class="badge badge-slate">SD Salatiga 03</span>
                 </div>
                 <div class="bar-chart-container" id="barChartContainer">
@@ -919,6 +942,12 @@
                     Hapus Semua Data
                   </button>
                 </div>
+              </div>
+
+              <!-- Active admin category filter badge (if filtered via chart) -->
+              <div id="adminCategoryFilterBadge" style="display:none; align-items:center; gap:8px; margin: 0 0 16px 0; background:#EFF6FF; border:1px solid #BFDBFE; padding:6px 14px; border-radius:var(--radius-pill); width:fit-content; font-size:13px; color:#1E40AF;">
+                <span>Filter Kategori: <b id="adminCategoryFilterText">-</b></span>
+                <button type="button" onclick="clearAdminCategoryFilter()" style="background:none; border:none; cursor:pointer; font-weight:700; color:#1E40AF; padding:0 4px;" title="Hapus filter">✕ Hapus Filter</button>
               </div>
 
               <div class="table-responsive">
@@ -1190,6 +1219,50 @@
             <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
             Ya, Hapus Semua & Kosongkan Spreadsheet
           </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       7. MODAL DAFTAR GURU PER KATEGORI JABATAN (GRAFIK INTERAKTIF)
+       ===================================================================== -->
+  <div class="modal-backdrop" id="categoryTeachersModal">
+    <div class="modal-box" style="max-width: 680px; width: 95%;">
+      <div class="modal-box-header" style="text-align: left; border-bottom: 1px solid var(--border-color); padding: 18px 24px;">
+        <button class="btn btn-icon close-btn" onclick="closeCategoryTeachersModal()" aria-label="Tutup">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <div id="catModalIconWrap" style="width: 44px; height: 44px; border-radius: 12px; background: #EFF6FF; color: #2563EB; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0;">
+            📚
+          </div>
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <h3 id="catModalTitle" style="font-size: 16px; font-weight: 800; color: var(--text-main); margin: 0;">Daftar Guru</h3>
+              <span id="catModalCountBadge" class="badge badge-primary">0 Orang</span>
+            </div>
+            <p id="catModalSubtitle" style="font-size: 12px; color: var(--text-muted); margin: 3px 0 0 0;">SD Salatiga 03 — Data terintegrasi langsung dengan database</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-body" style="padding: 18px 22px; max-height: 60vh; overflow-y: auto;">
+        <div id="catModalTeacherList" class="cat-teacher-list">
+          <!-- Rendered via JS -->
+        </div>
+      </div>
+
+      <div class="modal-footer" style="padding: 14px 22px; background: var(--bg-subtle); border-top: 1px solid var(--border-color); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+        <div id="catModalPrivacyNote" style="font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 6px;">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          <span id="catModalPrivacyText">Privasi NIP disamarkan untuk umum.</span>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" id="catModalViewTableBtn" class="btn btn-secondary btn-sm" onclick="filterTableFromCategoryModal()">
+            📋 Tampilkan di Tabel
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="closeCategoryTeachersModal()">Tutup</button>
         </div>
       </div>
     </div>

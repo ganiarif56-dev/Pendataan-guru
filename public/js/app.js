@@ -34,10 +34,35 @@ const appState = {
     isConnected: true
   },
   formModalMode: 'create', // 'create' | 'edit'
-  editingTeacherId: null
+  editingTeacherId: null,
+  publicCategoryFilter: null,
+  adminCategoryFilter: null,
+  activeCategoryModalKey: null
 };
 
-// Fallback initial data (25 Guru SD Salatiga 03)
+// Kategori Jabatan untuk Grafik & Analitik
+const CHART_CATEGORIES = [
+  { key: 'Kepala Sekolah', label: 'Kepala Sekolah', shortLabel: 'Kepala S...', icon: '🎓', color: '#3B82F6' },
+  { key: 'Guru Kelas', label: 'Guru Kelas', shortLabel: 'Guru Kelas', icon: '📚', color: '#2563EB' },
+  { key: 'Guru PJOK', label: 'Guru PJOK', shortLabel: 'Guru PJOK', icon: '⚽', color: '#10B981' },
+  { key: 'PAI / PAK', label: 'PAI / PAK', shortLabel: 'PAI / PAK', icon: '🕌', color: '#F59E0B' },
+  { key: 'Seni & Bhs', label: 'Seni & Bahasa', shortLabel: 'Seni & Bhs', icon: '🎨', color: '#EC4899' },
+  { key: 'Tendik / Lainnya', label: 'Tendik / Staf', shortLabel: 'Tendik / ...', icon: '💼', color: '#8B5CF6' }
+];
+
+// Helper klasifikasi kategori guru berdasarkan jabatan
+function getTeacherCategoryKey(t) {
+  const j = (t.jabatan || t['Jabatan / Penugasan'] || t.jabatan___penugasan || '').toLowerCase();
+  if (j.includes('kepala sekolah') || j.includes('kepsek')) return 'Kepala Sekolah';
+  if (j.includes('pjok') || j.includes('penjas') || j.includes('olahraga')) return 'Guru PJOK';
+  if (j.includes('pai') || j.includes('pak') || j.includes('agama') || j.includes('paipb') || j.includes('pakpb')) return 'PAI / PAK';
+  if (j.includes('seni') || j.includes('jawa') || (j.includes('bahasa') && !j.includes('guru kelas') && !j.includes('kelas 2a') && !j.includes('kelas 3a'))) return 'Seni & Bhs';
+  if (j.includes('tenaga kependidikan') || j.includes('tendik') || j.includes('shadow') || j.includes('tata usaha') || j.includes('tu') || j.includes('administrasi') || j.includes('penjaga') || j.includes('kebersihan') || j.includes('satpam')) return 'Tendik / Lainnya';
+  if (j.includes('guru kelas') || j.includes('wali kelas') || j.includes('kelas')) return 'Guru Kelas';
+  return 'Tendik / Lainnya';
+}
+
+// Fallback initial data (22 Guru SD Salatiga 03)
 const DEFAULT_TEACHERS = [
   { "id": "GURU-001", "no": 1, "nama": "Arini Nuja Wahyudi", "nip": "196904242003121006", "tempat_lahir": "Klaten", "tanggal_lahir": "1969-04-24", "status": "PNS", "jabatan": "Kepala Sekolah", "perangkat": "III/d" },
   { "id": "GURU-002", "no": 2, "nama": "Chatarina Venti Aprilia", "nip": "199204092020122001", "tempat_lahir": "Salatiga", "tanggal_lahir": "1992-04-09", "status": "PNS", "jabatan": "Guru Kelas 4B dan Kokurikuler", "perangkat": "III/a" },
@@ -60,10 +85,7 @@ const DEFAULT_TEACHERS = [
   { "id": "GURU-019", "no": 19, "nama": "Septine Dwi Ningsih Maryani", "nip": "199409032024212029", "tempat_lahir": "Salatiga", "tanggal_lahir": "1994-09-03", "status": "PPPK", "jabatan": "Guru PAIPB Kelas B dan Kokurikuler", "perangkat": "IX" },
   { "id": "GURU-020", "no": 20, "nama": "Bekti Ariyani", "nip": "199603272025212048", "tempat_lahir": "Kab. Semarang", "tanggal_lahir": "1996-03-27", "status": "PPPK Paruh Waktu", "jabatan": "Guru Bahasa Jawa Kelas 2-6", "perangkat": "Paruh Waktu" },
   { "id": "GURU-021", "no": 21, "nama": "Risang Purnomo", "nip": "9946754655130122", "tempat_lahir": "Salatiga", "tanggal_lahir": "1976-06-14", "status": "PPPK Paruh Waktu", "jabatan": "Tenaga Kependidikan", "perangkat": "Paruh Waktu" },
-  { "id": "GURU-022", "no": 22, "nama": "DEWI SANDRA AGUSTIN", "nip": "-", "tempat_lahir": "KAB. SEMARANG", "tanggal_lahir": "1995-07-05", "status": "PPPK Paruh Waktu", "jabatan": "Shadow Teacher", "perangkat": "Paruh Waktu" },
-  { "id": "GURU-023", "no": 23, "nama": "ghani", "nip": "1234567898765432", "tempat_lahir": "salatiga", "tanggal_lahir": "2004-02-11", "status": "PNS", "jabatan": "Kepala Sekolah", "perangkat": "III/A", "penugasan": "guru kelas 0" },
-  { "id": "GURU-024", "no": 24, "nama": "gita", "nip": "9876543212345678", "tempat_lahir": "semarang", "tanggal_lahir": "2026-10-14", "status": "PPPK", "jabatan": "Guru", "perangkat": "III/A", "penugasan": "kelas 11" },
-  { "id": "GURU-025", "no": 25, "nama": "rian", "nip": "5678987654321347", "tempat_lahir": "salatiga", "tanggal_lahir": "2003-01-11", "status": "GTY", "jabatan": "Guru Kelas 3A, Guru Bahasa Inggris", "perangkat": "III/A", "penugasan": "guru mapel ipas", "wa": "0876422157880" }
+  { "id": "GURU-022", "no": 22, "nama": "DEWI SANDRA AGUSTIN", "nip": "-", "tempat_lahir": "KAB. SEMARANG", "tanggal_lahir": "1995-07-05", "status": "PPPK Paruh Waktu", "jabatan": "Shadow Teacher", "perangkat": "Paruh Waktu" }
 ];
 
 // ==========================================================================
@@ -184,7 +206,8 @@ function renderPublicTeacherTable() {
       (t.jabatan && t.jabatan.toLowerCase().includes(searchVal));
 
     const matchStatus = !filterStatus || t.status === filterStatus;
-    return matchSearch && matchStatus;
+    const matchCategory = !appState.publicCategoryFilter || getTeacherCategoryKey(t) === appState.publicCategoryFilter;
+    return matchSearch && matchStatus && matchCategory;
   });
 
   // Mask NIP for public privacy (e.g., 19690424********06)
@@ -374,42 +397,211 @@ function renderAdminDashboardStats() {
 }
 
 function renderBarChart() {
-  const container = document.getElementById('barChartContainer');
-  if (!container) return;
+  const containers = [
+    { el: document.getElementById('barChartContainer'), isPublic: false },
+    { el: document.getElementById('pubBarChartContainer'), isPublic: true }
+  ];
 
-  // Frekuensi Kategori Jabatan
-  const counts = {
-    'Kepala Sekolah': 0,
-    'Guru Kelas': 0,
-    'Guru PJOK': 0,
-    'PAI / PAK': 0,
-    'Seni & Bhs': 0,
-    'Tendik / Lainnya': 0
-  };
+  // Frekuensi Kategori Jabatan Dihitung Real-time dari appState.teachers
+  const counts = {};
+  CHART_CATEGORIES.forEach(c => { counts[c.key] = 0; });
 
   appState.teachers.forEach(t => {
-    const j = (t.jabatan || '').toLowerCase();
-    if (j.includes('kepala sekolah')) counts['Kepala Sekolah']++;
-    else if (j.includes('kelas')) counts['Guru Kelas']++;
-    else if (j.includes('pjok')) counts['Guru PJOK']++;
-    else if (j.includes('pai') || j.includes('pak')) counts['PAI / PAK']++;
-    else if (j.includes('seni') || j.includes('jawa') || j.includes('inggris')) counts['Seni & Bhs']++;
-    else counts['Tendik / Lainnya']++;
+    const cat = getTeacherCategoryKey(t);
+    if (counts.hasOwnProperty(cat)) {
+      counts[cat]++;
+    } else {
+      counts['Tendik / Lainnya']++;
+    }
   });
 
-  const items = Object.entries(counts);
-  const maxVal = Math.max(...items.map(i => i[1]), 1);
+  const maxVal = Math.max(...Object.values(counts), 1);
 
-  container.innerHTML = items.map(([label, val]) => {
-    const heightPercent = Math.max(Math.round((val / maxVal) * 85), 18);
-    return `
-      <div class="bar-col">
-        <div class="bar-val-bubble">${val}</div>
-        <div class="bar-fill" style="height: ${heightPercent}%;" title="${escapeHtml(label)}: ${val} Orang"></div>
-        <div class="bar-lbl" title="${escapeHtml(label)}">${escapeHtml(label)}</div>
-      </div>
-    `;
-  }).join('');
+  containers.forEach(({ el, isPublic }) => {
+    if (!el) return;
+
+    el.innerHTML = CHART_CATEGORIES.map(cat => {
+      const val = counts[cat.key] || 0;
+      const heightPercent = maxVal > 0 ? Math.max(Math.round((val / maxVal) * 85), 18) : 18;
+      const activeFilter = isPublic ? appState.publicCategoryFilter : appState.adminCategoryFilter;
+      const isActive = activeFilter === cat.key;
+
+      return `
+        <div class="bar-col ${isActive ? 'active' : ''}" 
+             onclick="handleCategoryChartClick('${cat.key}', ${isPublic})" 
+             title="Klik untuk melihat ${val} guru/staf kategori ${escapeHtml(cat.label)}">
+          <div class="bar-val-bubble">${val}</div>
+          <div class="bar-fill" style="height: ${heightPercent}%;"></div>
+          <div class="bar-lbl" title="${escapeHtml(cat.label)}">${escapeHtml(cat.shortLabel || cat.label)}</div>
+        </div>
+      `;
+    }).join('');
+  });
+}
+
+// Handler interaksi klik pada grafik batang kategori
+function handleCategoryChartClick(categoryKey, isPublic) {
+  openCategoryTeachersModal(categoryKey, isPublic);
+}
+
+function openCategoryTeachersModal(categoryKey, isPublic) {
+  appState.activeCategoryModalKey = categoryKey;
+  const isPub = (typeof isPublic === 'boolean') ? isPublic : (appState.activeView === 'public');
+
+  const catMeta = CHART_CATEGORIES.find(c => c.key === categoryKey) || {
+    key: categoryKey,
+    label: categoryKey,
+    icon: '📋'
+  };
+
+  const filteredTeachers = appState.teachers.filter(t => getTeacherCategoryKey(t) === categoryKey);
+
+  // Set modal header
+  safeSetText('catModalTitle', `Data ${catMeta.label}`);
+  safeSetText('catModalCountBadge', `${filteredTeachers.length} Orang`);
+  const iconWrap = document.getElementById('catModalIconWrap');
+  if (iconWrap) iconWrap.textContent = catMeta.icon;
+
+  const subtitle = document.getElementById('catModalSubtitle');
+  if (subtitle) {
+    subtitle.textContent = `SD Salatiga 03 — Menampilkan ${filteredTeachers.length} data guru/staf dalam kategori ${catMeta.label}.`;
+  }
+
+  // Set privacy note
+  const privacyNote = document.getElementById('catModalPrivacyNote');
+  const privacyText = document.getElementById('catModalPrivacyText');
+  if (isPub) {
+    if (privacyNote) privacyNote.style.display = 'flex';
+    if (privacyText) privacyText.textContent = 'Privasi NIP disamarkan untuk umum. Masuk admin untuk melihat lengkap.';
+  } else {
+    if (privacyNote) privacyNote.style.display = 'flex';
+    if (privacyText) privacyText.textContent = 'Mode Administrator: NIP & seluruh data tampil lengkap.';
+  }
+
+  // Set action button text
+  const viewTableBtn = document.getElementById('catModalViewTableBtn');
+  if (viewTableBtn) {
+    viewTableBtn.textContent = isPub ? '📋 Tampilkan di Tabel Direktori' : '📋 Buka di Tabel Data Guru';
+  }
+
+  // Render teachers cards
+  const listContainer = document.getElementById('catModalTeacherList');
+  if (listContainer) {
+    if (filteredTeachers.length === 0) {
+      listContainer.innerHTML = `
+        <div style="text-align:center; padding:32px 10px; color:var(--text-muted);">
+          <div style="font-size:32px; margin-bottom:8px;">📂</div>
+          <p style="font-size:14px; font-weight:600;">Belum ada guru/staf yang terdaftar di kategori ini.</p>
+        </div>
+      `;
+    } else {
+      listContainer.innerHTML = filteredTeachers.map((t, idx) => {
+        const initials = (t.nama || 'G')
+          .split(' ')
+          .map(w => w[0])
+          .filter(Boolean)
+          .slice(0, 2)
+          .join('')
+          .toUpperCase();
+
+        const badgeClass = t.status === 'PNS' ? 'badge-active' : (t.status === 'PPPK' ? 'badge-primary' : 'badge-slate');
+
+        let nipDisplay = '';
+        if (isPub) {
+          const rawNip = t.nip && t.nip !== '-' ? t.nip : '198501012010011005';
+          const masked = rawNip.length > 8 ? rawNip.slice(0, 8) + '••••••••' : '••••••••';
+          nipDisplay = `<span class="cat-teacher-nip-code" title="Privasi NIP Disamarkan">🔒 <code>${escapeHtml(masked)}</code></span>`;
+        } else {
+          const rawNip = t.nip && t.nip !== '-' ? t.nip : '-';
+          nipDisplay = `<span class="cat-teacher-nip-code">NIP: <code>${escapeHtml(rawNip)}</code></span>`;
+        }
+
+        const adminAction = !isPub ? `
+          <button class="btn btn-secondary btn-sm" onclick="closeCategoryTeachersModal(); openDetailModal('${t.id}')" title="Lihat detail & kelola guru ini">
+            🔍 Detail
+          </button>
+        ` : '';
+
+        return `
+          <div class="cat-teacher-card">
+            <div class="cat-teacher-avatar">${initials}</div>
+            <div class="cat-teacher-info">
+              <div class="cat-teacher-name-row">
+                <h4 class="cat-teacher-name">${escapeHtml(t.nama)}</h4>
+                <span class="badge ${badgeClass}">${escapeHtml(t.status || 'PNS')}</span>
+              </div>
+              <div class="cat-teacher-meta">
+                <span>💼 ${escapeHtml(t.jabatan || '-')}</span>
+                <span>•</span>
+                <span>🎖️ Gol: ${escapeHtml(t.perangkat || '-')}</span>
+              </div>
+              <div class="cat-teacher-nip">
+                ${nipDisplay}
+              </div>
+            </div>
+            ${adminAction}
+          </div>
+        `;
+      }).join('');
+    }
+  }
+
+  const modal = document.getElementById('categoryTeachersModal');
+  if (modal) modal.classList.add('active');
+}
+
+function closeCategoryTeachersModal() {
+  const modal = document.getElementById('categoryTeachersModal');
+  if (modal) modal.classList.remove('active');
+}
+
+function filterTableFromCategoryModal() {
+  const categoryKey = appState.activeCategoryModalKey;
+  closeCategoryTeachersModal();
+  if (!categoryKey) return;
+
+  if (appState.activeView === 'public') {
+    appState.publicCategoryFilter = categoryKey;
+    const badge = document.getElementById('pubCategoryFilterBadge');
+    const textEl = document.getElementById('pubCategoryFilterText');
+    if (badge && textEl) {
+      badge.style.display = 'inline-flex';
+      textEl.textContent = categoryKey;
+    }
+    renderPublicTeacherTable();
+    renderBarChart();
+    const direktoriSection = document.getElementById('direktori-guru');
+    if (direktoriSection) {
+      direktoriSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  } else {
+    switchAdminTab('data-guru');
+    appState.adminCategoryFilter = categoryKey;
+    const badge = document.getElementById('adminCategoryFilterBadge');
+    const textEl = document.getElementById('adminCategoryFilterText');
+    if (badge && textEl) {
+      badge.style.display = 'inline-flex';
+      textEl.textContent = categoryKey;
+    }
+    renderAdminTable();
+    renderBarChart();
+  }
+}
+
+function clearPublicCategoryFilter() {
+  appState.publicCategoryFilter = null;
+  const badge = document.getElementById('pubCategoryFilterBadge');
+  if (badge) badge.style.display = 'none';
+  renderPublicTeacherTable();
+  renderBarChart();
+}
+
+function clearAdminCategoryFilter() {
+  appState.adminCategoryFilter = null;
+  const badge = document.getElementById('adminCategoryFilterBadge');
+  if (badge) badge.style.display = 'none';
+  renderAdminTable();
+  renderBarChart();
 }
 
 function renderDonutChart(total) {
@@ -504,7 +696,8 @@ function renderAdminTable() {
       (t.perangkat && t.perangkat.toLowerCase().includes(searchVal));
 
     const matchStatus = !filterStatus || t.status === filterStatus;
-    return matchSearch && matchStatus;
+    const matchCategory = !appState.adminCategoryFilter || getTeacherCategoryKey(t) === appState.adminCategoryFilter;
+    return matchSearch && matchStatus && matchCategory;
   });
 
   if (filtered.length === 0) {
@@ -1158,6 +1351,7 @@ window.addEventListener('keydown', (e) => {
     closeLoginModal();
     closeDetailModal();
     closeDeleteAllConfirmModal();
+    closeCategoryTeachersModal();
   }
 });
 
