@@ -2508,13 +2508,43 @@ img {
   }
 }
 
+/* Mobile table swipe hint indicator */
+.mobile-table-hint {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  font-size: 11.5px;
+  color: #1D4ED8;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
 /* ==========================================================================
    BREAKPOINTS: TABLET LANDSCAPE & SMALL LAPTOPS (<= 992px)
    ========================================================================== */
 @media (max-width: 992px) {
-  /* Layout Collapsing */
+  /* Public Header switches to hamburger drawer navigation */
+  .pub-pill-nav {
+    display: none;
+  }
+
+  .pub-mobile-toggle-btn {
+    display: inline-flex;
+  }
+
+  /* Public Content Layout Collapsing */
   .pub-content-grid {
     grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Hide redundant duplicate Google Maps widget in sidebar on <= 992px */
+  .pub-sidebar-widgets .widget-card:nth-child(3) {
+    display: none;
   }
 
   .analytics-grid {
@@ -2574,41 +2604,59 @@ img {
 }
 
 /* ==========================================================================
-   BREAKPOINTS: TABLET PORTRAIT & MOBILE (<= 768px)
+   BREAKPOINTS: MOBILE PHONES & TABLET PORTRAIT (<= 768px)
    ========================================================================== */
 @media (max-width: 768px) {
-  /* Public Header */
-  .pub-pill-nav {
-    display: none;
+  /* Container margins for maximum readable area on phones */
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
   }
 
-  .pub-mobile-toggle-btn {
-    display: inline-flex;
-  }
-
+  /* Public Header on Mobile */
   .pub-header {
-    padding: 10px 0;
+    padding: 8px 0;
   }
 
   .pub-nav-container {
-    padding: 0 16px;
+    padding: 0 12px;
+  }
+
+  .pub-brand {
+    gap: 10px;
+  }
+
+  .pub-brand-logo {
+    width: 38px;
+    height: 38px;
   }
 
   .pub-brand-text h1 {
-    font-size: 16px;
+    font-size: 14.5px;
+    line-height: 1.15;
   }
 
   .pub-brand-text p {
-    font-size: 10px;
+    font-size: 9.5px;
+  }
+
+  /* Hide 'Masuk Admin' button on mobile header bar (prominent inside drawer) */
+  .pub-header-admin-btn {
+    display: none;
   }
 
   .pub-header-actions {
-    gap: 8px;
+    gap: 6px;
   }
 
-  /* Hero Card Adaptations */
+  .pub-header-actions .btn-sm {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  /* Hero Section Mobile Fluid Adaptations */
   .hero-section {
-    padding: 14px 0 24px 0;
+    padding: 10px 0 16px 0;
   }
 
   .hero-main-card {
@@ -2617,43 +2665,79 @@ img {
   }
 
   .hero-content {
-    padding: clamp(24px, 5vw, 36px) clamp(18px, 4vw, 24px) 18px clamp(18px, 4vw, 24px);
+    padding: 20px 16px 12px 16px;
+    width: 100%;
     max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero-title-badge {
+    font-size: 10.5px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+    white-space: normal;
+    line-height: 1.35;
   }
 
   .hero-title {
-    font-size: clamp(24px, 6vw, 32px);
-    margin-bottom: 10px;
+    font-size: clamp(20px, 5.5vw, 26px);
+    margin-bottom: 8px;
+    line-height: 1.2;
   }
 
   .hero-subtitle {
-    font-size: 13.5px;
-    margin-bottom: 18px;
+    font-size: 12.5px;
+    line-height: 1.55;
+    margin-bottom: 14px;
   }
 
   .hero-badges-row {
-    margin-bottom: 20px;
-    gap: 8px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    margin-bottom: 16px;
   }
 
   .hero-pill-badge {
-    font-size: 11.5px;
-    padding: 4px 10px;
+    font-size: 11px;
+    padding: 5px 10px;
+    max-width: 100%;
+    word-break: break-word;
+    box-sizing: border-box;
   }
 
-  /* Hero Carousel Bar on Mobile */
-  .hero-carousel-bar {
-    padding: 12px 18px 18px 18px;
-    justify-content: center;
+  .hero-actions-row {
+    flex-direction: column;
     width: 100%;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .hero-actions-row .btn,
+  .hero-actions-row a.btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+    font-size: 13.5px;
+    box-sizing: border-box;
+  }
+
+  /* Hero Carousel Bar on Mobile (Compact & Overflow-proof) */
+  .hero-carousel-bar {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px 14px 12px;
+    justify-content: center;
+    gap: 6px;
   }
 
   .hero-thumbnails-container {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
-    max-width: 100%;
-    padding: 4px 8px;
+    max-width: calc(100% - 74px);
+    padding: 3px 6px;
+    gap: 6px;
   }
 
   .hero-thumbnails-container::-webkit-scrollbar {
@@ -2661,26 +2745,63 @@ img {
   }
 
   .hero-thumb {
-    width: 54px;
-    height: 38px;
+    width: 48px;
+    height: 34px;
     flex-shrink: 0;
   }
 
-  /* Public Main Card */
+  .hero-nav-arrow {
+    width: 32px;
+    height: 32px;
+    min-height: 32px;
+    flex-shrink: 0;
+  }
+
+  /* Public Main Cards (Profil, Direktori, Lokasi) */
   .pub-main-card {
-    padding: clamp(16px, 4vw, 24px);
+    padding: 16px 14px;
     border-radius: var(--radius-md);
-    margin-bottom: 18px;
+    margin-bottom: 16px;
+  }
+
+  .pub-section-header {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+  }
+
+  .pub-section-title {
+    gap: 8px;
+  }
+
+  .pub-section-title h2 {
+    font-size: 16.5px;
   }
 
   .pub-profile-body {
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 14px;
+  }
+
+  .pub-profile-text p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 10px;
   }
 
   .pub-profile-features {
     grid-template-columns: 1fr;
-    gap: 10px;
+    gap: 8px;
+    margin-top: 12px;
+  }
+
+  .pub-feature-item {
+    font-size: 12px;
+    padding: 8px 10px;
+    background: var(--bg-subtle);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border-color);
   }
 
   .pub-profile-media img {
@@ -2688,97 +2809,161 @@ img {
     width: 100%;
     height: auto;
     object-fit: cover;
-  }
-
-  /* Responsive Sticky Table (Pinned Name on Horizontal Swipe) */
-  .table-responsive {
-    border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
   }
 
-  .data-table th,
-  .data-table td {
-    padding: 10px 12px;
-    font-size: 12.5px;
-  }
-
-  /* Sticky 2nd Column (Nama Guru) */
-  .data-table th:nth-child(2),
-  .data-table td:nth-child(2) {
-    position: sticky;
-    inset-inline-start: 0;
-    z-index: 5;
-    background: #FFFFFF;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.06);
-  }
-
-  .data-table th:nth-child(2) {
-    z-index: 6;
-    background: #F8FAFC;
-  }
-
-  /* Toolbars */
-  .table-toolbar {
-    padding: 14px 16px;
+  /* Privacy Notice Banner on Mobile */
+  .privacy-notice-banner {
     flex-direction: column;
     align-items: stretch;
-    gap: 12px;
+    gap: 10px;
+    padding: 12px 14px;
+    font-size: 11.5px;
+    line-height: 1.5;
   }
 
-  .toolbar-actions {
+  .privacy-notice-banner button {
     width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+    justify-content: center;
+    min-height: 40px;
+  }
+
+  /* Grafik Kategori Guru Card on Mobile */
+  .pub-chart-card {
+    padding: 12px 10px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .pub-chart-card .analytics-card-header h3 {
+    font-size: 13.5px;
+  }
+
+  .pub-chart-card .analytics-card-header p {
+    font-size: 11px;
+  }
+
+  .bar-chart-container {
+    height: 140px;
+    padding-top: 10px;
+    gap: 4px;
+  }
+
+  .bar-fill {
+    max-width: 24px;
+  }
+
+  .bar-val-bubble {
+    font-size: 10px;
+  }
+
+  .bar-lbl {
+    font-size: 9px;
+    max-width: 42px;
+  }
+
+  /* Direktori Toolbar on Mobile */
+  .pub-main-card > div[style*="display:flex; gap:12px"] {
+    flex-direction: column;
+    gap: 8px !important;
   }
 
   .filter-input-wrap,
   .filter-search-input,
   .filter-select {
-    width: 100%;
-    min-width: 0;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
   }
 
-  /* Forms & Modals */
-  .form-grid-2 {
-    grid-template-columns: 1fr;
-    gap: 12px;
+  /* Show mobile table swipe hint */
+  .mobile-table-hint {
+    display: flex;
   }
 
+  /* Responsive Mobile Table: Hide 'No' column & Pin Teacher Name at left: 0 cleanly */
+  .table-responsive {
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Hide narrow 'No' column on mobile to eliminate overlap */
+  .data-table th:first-child,
+  .data-table td:first-child {
+    display: none !important;
+  }
+
+  /* Clean sticky teacher name with max-width so it wraps and leaves 60%+ width for swiping */
+  .data-table th:nth-child(2),
+  .data-table td:nth-child(2) {
+    position: sticky !important;
+    inset-inline-start: 0 !important;
+    left: 0 !important;
+    z-index: 5 !important;
+    background: #FFFFFF !important;
+    box-shadow: 3px 0 8px rgba(0, 0, 0, 0.08) !important;
+    max-width: 135px !important;
+    min-width: 120px !important;
+    white-space: normal !important;
+    line-height: 1.35 !important;
+    font-size: 12.5px !important;
+  }
+
+  .data-table th:nth-child(2) {
+    background: #F8FAFC !important;
+    z-index: 6 !important;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+
+  /* Google Maps Iframe in #lokasi */
+  #lokasi div[style*="height:280px"] {
+    height: 210px !important;
+  }
+
+  /* Sidebar Widgets on Mobile */
+  .pub-sidebar-widgets {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .widget-card {
+    padding: 16px 14px;
+  }
+
+  /* Modals on Mobile */
   .modal-backdrop {
-    padding: 10px;
+    padding: 8px;
   }
 
   .modal-box {
-    max-height: 92dvh;
+    max-height: 90dvh;
     border-radius: var(--radius-lg);
   }
 
   .modal-box-header {
-    padding: 16px 18px;
+    padding: 14px 16px;
   }
 
-  /* Detail Guru Modal */
-  .detail-banner {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 18px;
-    gap: 12px;
-  }
-
-  .detail-content-body {
+  .form-grid-2 {
     grid-template-columns: 1fr;
-    padding: 16px;
+    gap: 10px;
   }
 
-  /* Footer */
+  /* Footer on Mobile */
   .pub-footer {
-    padding: 36px 0 20px 0;
+    padding: 30px 0 18px 0;
   }
 
   .pub-footer-grid {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 20px;
     text-align: center;
   }
 
@@ -2794,36 +2979,45 @@ img {
   .pub-footer-bottom {
     flex-direction: column;
     text-align: center;
-    gap: 14px;
+    gap: 12px;
     align-items: center;
-  }
-
-  .pub-footer-bottom > div:last-child {
-    text-align: center !important;
   }
 }
 
 /* ==========================================================================
-   BREAKPOINTS: SMALL MOBILE (<= 480px)
+   BREAKPOINTS: COMPACT SMARTPHONES (<= 480px)
    ========================================================================== */
 @media (max-width: 480px) {
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
   /* Top Banner Notification */
   .demo-badge-bar {
-    padding: 5px 10px;
-    font-size: 11px;
+    padding: 4px 8px;
+    font-size: 10.5px;
     flex-wrap: wrap;
-    line-height: 1.4;
+    line-height: 1.35;
   }
 
   .demo-badge-bar span.badge {
-    font-size: 10px;
-    padding: 1px 6px;
+    font-size: 9.5px;
+    padding: 1px 5px;
   }
 
   /* Brand Logo & Header Actions */
   .pub-brand-logo {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .pub-brand-text h1 {
+    font-size: 13.5px;
+  }
+
+  .pub-brand-text p {
+    display: none;
   }
 
   .btn-text-desktop {
@@ -2831,77 +3025,46 @@ img {
   }
 
   .pub-header-actions .btn-sm {
-    padding: 8px 10px;
+    padding: 6px 8px;
   }
 
-  /* Hero Section */
-  .hero-actions-row {
-    flex-direction: column;
-    width: 100%;
+  .hero-content {
+    padding: 16px 12px 10px 12px;
   }
 
-  .hero-actions-row .btn {
-    width: 100%;
-    justify-content: center;
+  .pub-main-card {
+    padding: 12px 10px;
   }
 
-  /* Admin Topbar */
-  .admin-topbar {
-    padding: 8px 12px;
+  .pub-section-title h2 {
+    font-size: 15px;
   }
 
-  .admin-search-wrap input {
-    font-size: 12px;
-    padding: 6px 10px 6px 30px;
-  }
-
-  .admin-profile-meta h4 {
-    font-size: 12px;
-  }
-
-  /* Stat Cards */
+  /* Stat Cards in Admin */
   .stat-cards-grid {
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 8px;
   }
 
   .stat-metric-card {
-    padding: 12px;
-    gap: 10px;
-  }
-
-  .stat-icon-wrap {
-    width: 36px;
-    height: 36px;
-  }
-
-  .stat-icon-wrap svg {
-    width: 18px;
-    height: 18px;
+    padding: 10px;
+    gap: 8px;
   }
 
   .stat-val {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .stat-lbl {
-    font-size: 10.5px;
-  }
-
-  /* Buttons in Toolbar */
-  .toolbar-actions .btn,
-  .toolbar-actions a.btn {
-    flex: 1 1 100%;
-    justify-content: center;
+    font-size: 10px;
   }
 
   /* Touch Targets Accessibility (minimum 44px) */
   button,
   .btn,
   input,
-  select,
-  .hero-nav-arrow {
-    min-height: 42px;
+  select {
+    min-height: 44px;
   }
 }
 
@@ -2912,8 +3075,19 @@ img {
   .stat-cards-grid {
     grid-template-columns: 1fr;
   }
-  .pub-brand-text p {
-    display: none;
+
+  .hero-thumb {
+    width: 42px;
+    height: 30px;
+  }
+
+  .bar-chart-container {
+    height: 125px;
+  }
+
+  .bar-lbl {
+    font-size: 8.5px;
+    max-width: 36px;
   }
 }
 

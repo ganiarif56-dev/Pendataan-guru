@@ -54,7 +54,7 @@
             <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
             <span class="btn-text-desktop">Isi Data Guru</span>
           </button>
-          <button class="btn btn-secondary btn-sm" onclick="openLoginModal()">
+          <button class="btn btn-secondary btn-sm pub-header-admin-btn" onclick="openLoginModal()">
             <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
             <span class="btn-text-desktop">Masuk Admin</span>
           </button>
@@ -135,7 +135,7 @@
               </div>
               <div class="hero-pill-badge">
                 <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                <span>25 Guru & Tenaga Kependidikan</span>
+                <span><b id="heroTeacherCountDisplay">22</b> Guru & Tenaga Kependidikan</span>
               </div>
             </div>
 
@@ -272,6 +272,12 @@
                 <option value="PPPK Paruh Waktu">PPPK Paruh Waktu</option>
                 <option value="GTY">GTY / Honorer</option>
               </select>
+            </div>
+
+            <!-- Hint Geser Tabel Khusus Layar HP / Mobile -->
+            <div class="mobile-table-hint">
+              <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              <span>Geser tabel ke samping untuk melihat NIP, Status, & Jabatan</span>
             </div>
 
             <div class="table-responsive">

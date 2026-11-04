@@ -251,6 +251,7 @@ function renderPublicTeacherTable() {
   `).join('');
 
   safeSetText('pubTeacherCount', `${filtered.length} dari ${appState.teachers.length} Guru`);
+  safeSetText('heroTeacherCountDisplay', appState.teachers.length);
 }
 
 // ==========================================================================
